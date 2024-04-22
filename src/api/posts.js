@@ -1,32 +1,32 @@
-//axios json data 조회
+// axios를 사용한 HTTP 요청
+import axios from 'axios';
 
-// import axios from 'axios';
-import {posts} from ".";
+// 서버 API의 기본 URL 설정
+const API_URL = 'http://localhost:4000'; // 실제 서버의 URL로 대체 필요
 
-// const posts = [
-//     {id:1, title:'제목1',content:'내용1',createdAt:'2024-01-01'},
-//     {id:2, title:'제목2',content:'내용2',createdAt:'2024-02-02'},
-//     {id:3, title:'제목3',content:'내용3',createdAt:'2024-03-03'},
-//     {id:4, title:'제목4',content:'내용4',createdAt:'2024-04-04'},
-//     {id:5, title:'제목5',content:'내용5',createdAt:'2024-05-05'},
-// ];
-
-export function getPosts(params){
-    return posts.get('/', {params});
+export function getPosts(params) {
+    return axios.get(`${API_URL}/posts`, { params });
 }
 
 export function getPostById(id) {
-    return posts.get(`/${id}`);
+    return axios.get(`${API_URL}/posts/${id}`);
 }
 
-export function createPost(data) {
-    return posts.post('',data);
+// FormData를 사용하여 게시글 데이터를 서버에 전송
+export function createPost(formData) {
+    return axios.post(`${API_URL}/posts`, 
+    formData, 
+    {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 }
 
-export function updatePost(id,data) {
-    return posts.patch(`/${id}`,data);
+export function updatePost(id, data) {
+    return axios.patch(`${API_URL}/posts/${id}`, data);
 }
 
 export function deletePost(id) {
-    return posts.delete(`/${id}`);
+    return axios.delete(`${API_URL}/posts/${id}`);
 }

@@ -82,7 +82,7 @@ header .sub-menu ul.menu li a {
     padding: 0px 16px;
     display: block;
     color: #656565;
-
+    text-decoration: none;
 }
 
 header .sub-menu ul.menu li a:hover {

@@ -1,54 +1,43 @@
 <template>
     <h2>게시글 목록</h2>
     <hr class="my-4">
-    <PostFilter 
-    v-model:title="params.title_like" 
-    v-model:limit="params._limit"/>
+    <PostFilter v-model:title="params.title_like" v-model:limit="params._limit" />
     <div class="d-flex" role="search">
-        <button class="btn btn-outline-success" 
-        type="button" 
-        @click="goPage">글쓰기</button>
+        <button class="btn btn-outline-success" type="button" @click="goPage">글쓰기</button>
     </div>
     <hr class="my-4">
+
+    <AppLoading v-if="loading" />
+    <AppError v-else-if="error" :message="'error.message'" />
+    <template v-else>
         <AppGrid :items="posts">
-            <template v-slot="{item}">
-                <AppCard
-                    :title="item.title"
-                    :content="item.content" 
-                    :created-at="item.createdAt"
-                    @click="goPageId(item.id)"
-                    @modal="openModal(item)">
+            <template v-slot="{ item }">
+                <AppCard :title="item.title" :content="item.content" :created-at="item.createdAt"
+                    @click="goPageId(item.id)" @modal="openModal(item)">
                 </AppCard>
             </template>
         </AppGrid>
-        <AppPagination 
-        :current-page="params._page" 
-        :pageCount="pageCount" 
-        @page = "page =>(params._page = page)"/>   
-        <Teleport to="#modal">
-            <PostModal 
-            v-model="show" 
-            :title="modalTitle" 
-            :content="modalContent" 
-            :created-at="modalCreatedAt"/>
-        </Teleport>
-        <!-- summary -->
-        <template v-if="posts&&posts.length>0">
-            <hr class="my-5">
-                <AppCard2> 
-                    <PostDetailView :id="posts[0].id"></PostDetailView>
-                </AppCard2>
-        </template>
+        <AppPagination :current-page="params._page" :pageCount="pageCount" @page="page => (params._page = page)" />
+    </template>
+
+    <Teleport to="#modal">
+        <PostModal v-model="show" :title="modalTitle" :content="modalContent" :created-at="modalCreatedAt" />
+    </Teleport>
+    <!-- summary -->
+    <template v-if="posts&&posts.length>0">
+        <hr class="my-5">
+        <AppCard2>
+            <PostDetailView :id="posts[0].id"></PostDetailView>
+        </AppCard2>
+    </template>
 </template>
 
 <script setup>
-import AppGrid from '@/components/posts/AppGrid.vue';
-import AppCard from '@/components/AppCard.vue';
 import PostDetailView from  '@/views/posts/PostDetailView.vue';
-import AppPagination from '@/components/AppPagination.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
 import PostModal from '@/components/posts/PostModal.vue';
-import AppCard2 from '@/components/AppCard2.vue';
+import AppError from '@/components/app/AppError.vue';
+import AppLoading from '@/components/app/AppLoading.vue';
 import {getPosts} from '@/api/posts'
 import { useRouter } from 'vue-router';
 import {ref, watchEffect} from 'vue';
@@ -56,6 +45,8 @@ import {computed} from '@vue/reactivity'
 
 const router = useRouter()
 const posts = ref([]);
+const error = ref(null);
+const loading = ref(false);
 
 //정렬
 const params = ref({
@@ -73,11 +64,14 @@ const pageCount = computed(()=> Math.ceil(totalCount.value/ params.value._limit)
 
 const fetchPosts = async() => {
     try{
+        loading.value= true;
         const { data,headers } = await getPosts(params.value);
         posts.value = data;
         totalCount.value = headers['x-total-count'];
-    }catch(error){
-        console.error(error)
+    }catch(err){
+        error.value = err;
+    }finally{
+        loading.value =false;
     }
     // getPosts()
     // .then((response)=>{
