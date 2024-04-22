@@ -1,6 +1,7 @@
 <template>
     <div class="card" style="width: 18rem;">
-        <img src="@/assets/macpro.png" class="card-img-top" alt="macpro">
+        <!-- <img src="@/assets/macpro.png" class="card-img-top" alt="macpro"> -->
+        <img :src="image" class="card-img-top" alt="macpro">
         <div class="card-body">
             <!-- type : news, notice -->
             <span class="badge text-bg-secondary mt-2">{{ typeName }}</span>
@@ -42,7 +43,7 @@ export default {
         createdAt: {
             type : [String, Date, Number],
         },
-        obj: {
+        image: {
             type: Object,
             default: () => ({}),
         }
