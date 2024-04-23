@@ -34,22 +34,24 @@
     <div class="button-container">
     <!-- 플래너 버튼 -->
     <button class="icon-button">
-      <!-- <img src="@/assets/planner-icon.png" alt="플래너" class="icon"/> -->
-      <span>플래너 보기</span>
+      <img src="@/assets/planner-icon.png" alt="플래너" class="icon"/>
+      <span style="font-size: 20px;">플래너 보기</span>
     </button>
 
     <!-- 구매 버튼 -->
     <button class="icon-button">
-      <!-- <img src="@/assets/shopping-icon.png" alt="구매" class="icon"/> -->
-      <span>구매 보기</span>
+      <img src="@/assets/shopping-icon.png" alt="구매" class="icon"/>
+      <span style="font-size: 20px;">구매 보기</span>
     </button>
 
     <!-- 좋아요 버튼 -->
     <button class="icon-button">
-      <!-- <img src="@/assets/heart-icon.png" alt="좋아요" class="icon"/> -->
-      <span>관심 목록</span>
+      <img src="@/assets/heart-icon.png" alt="좋아요" class="icon"/>
+      <span style="font-size: 20px;">관심 목록</span>
     </button>
   </div>
+
+  <input type="button" value="test" @click="test">
 
 </template>
 
@@ -58,16 +60,28 @@
 
 export default {
     name: 'PotatoImages,IconButtons',
+    data() {
+        return {
+            potatoCnt: 16
+        }
+    },
     computed: {
     groupedPotatoes() {
       let result = [];
-      const potatoes = [...Array(16).keys()]; // 20개의 감자 이미지를 가진 배열 생성
+      const potatoes = [...Array(this.potatoCnt).keys()]; // 20개의 감자 이미지를 가진 배열 생성
       for (let i = 0; i < potatoes.length; i += 8) {
         result.push(potatoes.slice(i, i + 8)); // 배열을 10개 단위로 쪼개어 result에 추가
       }
       return result;
     }
-  }
+  },
+    methods: {
+        test() {
+
+            this.potatoCnt = 8; //DB가 저장된 갯수가 10개.
+
+        }
+    }
     // setup () {
     //     const state = reactive({
     //         count: 0,
@@ -115,6 +129,8 @@ export default {
 }
 
 .icon-button {
+  width: 1500px;
+  height: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,9 +141,10 @@ export default {
 }
 
 .icon-button .icon {
+  margin-top: 10px;
   margin-bottom: 5px;
-  width: 40px; /* 아이콘 크기 조정 */
-  height: 40px; /* 아이콘 크기 조정 */
+  width: 200px; /* 아이콘 크기 조정 */
+  height: 160px; /* 아이콘 크기 조정 */
 }
 
 .icon-button span {

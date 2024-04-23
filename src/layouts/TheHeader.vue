@@ -57,8 +57,8 @@
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-3" type="search" placeholder="물품이나 동네를 검색해보세요"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
+                            aria-label="Search" style="color: pink; border: 2px solid #B18904;">
+                        <button class="btn btn-outline-success" type="submit" style=" border: 2px solid #FFFFFF;">
                             <span class="material-symbols-outlined"> <!--검색 돋보기-->
                                 search
                             </span>
