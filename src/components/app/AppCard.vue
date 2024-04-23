@@ -52,11 +52,15 @@ export default {
     },
     emits: ['toggleLike','modal'],
     setup(props, context) {
+        //this.$refs.formImage.src = 'data:image/jpeg;base64,dXBsb2Fkc1wxNzEzODY5MjE1OTI5LW1hY3Byby5wbmc=';
         // console.log('props.title ', props.title);
         const isLikeClass = computed(() => props.isLike ? 'btn-danger' : 'btn-outline-danger');
         const typeName = computed(() => props.type === 'electronic' ? '전자기기' : '옷');
         const formattedImage = computed(()=>{
-            //base64 데이터가 제대로 렌더링 되도록 처리
+            console.log(`${props.image}`);
+            //base64 데이터가 제대로 렌더링 되도록 처리 
+            // return 'data:image/jpeg;base64,dXBsb2Fkc1wxNzEzODY5MjE1OTI5LW1hY3Byby5wbmc=';
+            //return props.image? `data:image/jpeg;base64,${props.image}`:'';
             return props.image? `data:image/jpeg;base64,${props.image}`:'';
         });
         const formattedDate = computed(()=>{
