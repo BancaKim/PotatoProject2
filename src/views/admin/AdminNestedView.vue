@@ -2,17 +2,17 @@
     <div>
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <RouterLink class="nav-link" active-class="active" :to="{name:'NestedOne', replace: true}">
+                <RouterLink class="nav-link" active-class="active" :to="{name:'DashBoard', replace: true}">
                     대쉬보드
                 </RouterLink>    
             </li>
             <li class="nav-item">
-                <RouterLink class="nav-link" active-class="active" :to="{name:'NestedTwo', replace: true}">
+                <RouterLink class="nav-link" active-class="active" :to="{name:'MemberInfo', replace: true}">
                     회원관리
                 </RouterLink>
             </li>
             <li class="nav-item">
-                <RouterLink class="nav-link" active-class="active" :to="{name:'NestedThree', replace: true}">
+                <RouterLink class="nav-link" active-class="active" :to="{name:'GridSystem', replace: true}">
                     GridSystem
                 </RouterLink>
             </li>
