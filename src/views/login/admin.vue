@@ -1,6 +1,6 @@
 <template>
     <div class="p-5 bg-image" style="
-          background: #F3E2A9;
+          background: #F8ECE0;
           /* width: 100%; */
           height: 450px;
           background-repeat: repeat-x;

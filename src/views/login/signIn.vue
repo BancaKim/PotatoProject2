@@ -2,7 +2,7 @@
 	<!-- Section: Design Block -->
 <section class="text-center">
   <div class="p-5 bg-image" style="
-        background: hsla(30, 100%, 80%, 1.0);
+        background: #F5ECCE;
         /* width: 100%; */
         height: 500px;
         background-repeat: repeat-x;
@@ -29,13 +29,13 @@
               <div class="col-md-6 mb-4">
                 <div data-mdb-input-init class="form-outline mb-4" style="text-align: left; display: block;">
               <label class="form-label" for="form3Example3">이름</label>
-              <input type="email" id="form3Example3" class="form-control" style="color: pink;" />
+              <input type="name" id="form3Example3" class="form-control" style="color: pink;" />
             </div>
               </div>
               <div class="col-md-6 mb-4">
                 <div data-mdb-input-init class="form-outline mb-4" style="text-align: left; display: block;">
               <label class="form-label" for="form3Example3">아이디</label>
-              <input type="email" id="form3Example3" class="form-control" style="color: pink;" />
+              <input type="id" id="form3Example3" class="form-control" style="color: pink;" />
             </div>
               </div>
             </div>
