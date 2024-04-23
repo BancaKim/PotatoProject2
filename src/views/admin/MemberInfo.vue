@@ -84,7 +84,7 @@
         </v-btn-group>
       </div>                         <!-- 여기가 메시지 보내는 모달창 종료 -->
 
-      
+
       <v-btn @click="sendMessage" color="primary white--text">Send Message</v-btn> <!--내가 해보려던 메시지 전송버튼 부분 -->
       <v-btn color="orange">회원정보 화면이동</v-btn>
       <v-btn color="primary">삭제기능??</v-btn>
@@ -94,71 +94,54 @@
   </v-container>
 </template>
 <script>
+import axios from 'axios';
+
+
 export default {
   data() {
     return {
       search: '',
       headers: [
-        { key: 'user_id', title: 'user_id', sortable: true, align: 'start' },
-        { key: 'name', title: 'name' },
-        { key: 'social_number', title: 'social_number' },
-        { key: 'address', title: 'address' },
-        { key: 'password', title: 'password' },
+        { key: 'user_id', title: '아이디', sortable: true, align: 'start' },
+        { key: 'user_name', title: '이름' },
+        { key: 'user_email', title: '이메일' },
+        { key: 'user_adrs', title: '주소' },
+        { key: 'user_pw', title: '비밀번호' },
         { key: 'gamja_give', title: 'gamja_(판매)' },
         { key: 'gamja_take', title: 'gamja_(구매)' },
       ],
-      members: [
-        {
-          user_id: 'bwer@qwe.com',
-          name: '이상준',
-          social_number: '980621_1032220',
-          address: 159,
-          password: 'qwe123!@#',
-          gamja_give: 24,
-          gamja_take: 5,
-        },
-        {
-          user_id: 'dwer@qwe.com',
-          name: '최유일',
-          social_number: '440621_1032220',
-          address: 159,
-          password: 'qwe123!@#',
-          gamja_give: 24,
-          gamja_take: 5,
-        },
-        {
-          user_id: 'awer@qwe.com',
-          name: '구한별',
-          social_number: '850621_1032220',
-          address: 159,
-          password: 'qwe123!@#',
-          gamja_give: 24,
-          gamja_take: 5,
-        },
-        {
-          user_id: 'zwer@qwe.com',
-          name: '김건',
-          social_number: '660621_1032220',
-          address: 159,
-          password: 'qwe123!@#',
-          gamja_give: 24,
-          gamja_take: 5,
-        },
-        {
-          user_id: 'qwer@qwe.com',
-          name: '반수희',
-          social_number: '850621_1032220',
-          address: 159,
-          password: 'qwe123!@#',
-          gamja_give: 24,
-          gamja_take: 5,
-        },
-      ],
+      members: []
+      // [
+      //   {
+      //     user_id: 'bwer@qwe.com',
+      //     user_name: '이상준',      
+      //     user_email:'raax@naver.com',
+      //     user_adrs: 159,
+      //     user_pw: 'qwe123!@#',
+      //     gamja_give: 24,
+      //     gamja_take: 5,
+      //   },
+      // ],
       // selectedMembers: [], // 선택된 회원 넣는 자리
     };
   },
   methods: {
-  },
+        getMemberInfo() {                                  // 회원정보 가져오는 부분
+            axios.get("http://localhost:4000/getmeminfo")
+            .then(res=> {
+            console.log(res);
+            console.log(res.data);                        // 이건 Array(3) 이 옵니다
+            console.log(Object.values(res.data));
+            console.log(Object.values(res.data));
+            alert(res.data.data);
+            this.members=res.data.data;
+                      })
+                  },
+            },
+
+  mounted() {                                             //바로 띄울 수 있게 정보 입력
+      this.getMemberInfo()
+    },
 
 
 }
