@@ -12,8 +12,16 @@
     <template v-else>
         <AppGrid :items="posts">
             <template v-slot="{ item }">
-                <AppCard :title="item.title" :content="item.content" :created-at="item.createdAt"
-                    @click="goPageId(item.id)" @modal="openModal(item)">
+                <!-- <AppCard :image="item.product_pic" :title="item.product_title" :content="item.product_content" :created-at="item.enroll_date"
+                    @click="goPageId(item.product_number)" @modal="openModal(item)">
+                </AppCard> -->
+                <AppCard
+                    :image="item.pic"
+                    :title="item.title"
+                    :content="item.content" 
+                    :created-at="item.createdAt"
+                    @click="goPageId(item.id)"
+                    @modal="openModal(item)">
                 </AppCard>
             </template>
         </AppGrid>
@@ -59,27 +67,44 @@ const params = ref({
 
 //pagination
 const totalCount = ref(0);
-const pageCount = computed(()=> Math.ceil(totalCount.value/ params.value._limit))
+// const pageCount = computed(()=> Math.ceil(totalCount.value/ params.value._limit))
+const pageCount = computed(() => {
+    if (params.value._limit <= 0) return 0;  // Ensure limit is not zero or negative
+    const total = Math.max(totalCount.value, 0);  // Ensure total is not negative
+    return Math.ceil(total / params.value._limit);
+});
 
-
-const fetchPosts = async() => {
-    try{
-        loading.value= true;
-        const { data,headers } = await getPosts(params.value);
-        posts.value = data;
-        totalCount.value = headers['x-total-count'];
-    }catch(err){
+const fetchPosts = async () => {
+    try {
+        loading.value = true;
+        const response = await getPosts(params.value); // API 호출
+        console.log('check', response);
+        if (response.data.data) {
+            posts.value = response.data.data; // 여기서 data는 배열이어야 합니다.//
+            console.log('API Response:', response.data.data);
+            // if (response.data) {
+            // posts.value = response.data; // 여기서 data는 배열이어야 합니다.//
+            // console.log('tesat', posts);
+            // console.log('API Response:', response.data);
+            totalCount.value = parseInt(response.headers['x-total-count'] || 0); // 헤더에서 totalCount 추출
+        } else {
+            console.error('No data received', response);
+            posts.value = []; // 데이터가 없다면 posts를 빈 배열로 설정
+        }
+    } catch (err) {
+        console.error('Error fetching posts:', err);
         error.value = err;
-    }finally{
-        loading.value =false;
+        posts.value = []; // 에러 발생 시 posts를 빈 배열로 설정
+    } finally {
+        loading.value = false;
     }
+};
     // getPosts()
     // .then((response)=>{
     //     console.log('response: ', response);
     // }).catch(error=>{
     //     console.log('error: ',error);
     // });
-}
 
 
 const goPage = () => {
@@ -87,13 +112,14 @@ const goPage = () => {
 };
 watchEffect(fetchPosts);
 const goPageId = (id) => {
-    // router.push(`/posts/'${id}`);
+    if (!id) {
+        console.error('ID is required to navigate to the detail page.');
+        return;
+    }
     router.push({
-        name:'PostDetail',
-        params: {
-            id,
-        }
-    })
+        name: 'PostDetail',
+        params: { id }
+    });
 };
 const show = ref(false);
 const modalTitle = ref('');

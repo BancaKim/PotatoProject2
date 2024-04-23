@@ -50,8 +50,10 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {},
+    "globals":{"kakao":false}
   },
+
   "browserslist": [
     "> 1%",
     "last 2 versions",
