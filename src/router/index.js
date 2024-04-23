@@ -12,12 +12,35 @@ import NestedView from '@/views/nested/NestedView.vue'
 import NestedOneView from '@/views/nested/NestedOneView.vue'
 import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 import NestedHomeView from  '@/views/nested/NestedHomeView.vue'
+import AdminNestedView from '@/views/admin/AdminNestedView.vue'
+import AdminOneView from '@/views/admin/AdminOneView.vue'
+import AdminTwoView from '@/views/admin/AdminTwoView.vue'
+import AdminThreeView from '@/views/admin/AdminThreeView.vue'
+import AdminHomeView from  '@/views/admin/AdminHomeView.vue'
+import login from '@/views/login/login.vue'
+import test from '@/views/login/test.vue'
+import signIn from '@/views/login/signIn.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+    {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+  {
+    path: '/kakaoLogin',
+    name: 'kakaoLogin',
+    component: test
+  },
+  {
+    path: '/signIn',
+    name: 'signIn',
+    component: signIn
   },
   {
     path: '/about',
@@ -75,6 +98,23 @@ const routes = [
     {path: '/nested/two', 
     name:'NestedTwo', 
     component: NestedTwoView}
+    ]},
+    {path: '/admin', 
+    name:'Admin', 
+    component: AdminNestedView,
+    children:[
+       {path: '', 
+    name:'NestedHome', 
+    component: AdminHomeView},
+         {path: '/nested/one', 
+    name:'NestedOne', 
+    component: AdminOneView},
+    {path: '/nested/two', 
+    name:'NestedTwo', 
+    component: AdminTwoView},
+    {path: '/nested/three', 
+    name:'NestedThree', 
+    component: AdminThreeView}
     ]},
 ];
 
