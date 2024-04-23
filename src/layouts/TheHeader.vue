@@ -34,7 +34,7 @@
                             <!-- <a class="nav-link" href="#">Link</a> -->
                         <!-- </li>-->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/nested">나의감자</router-link> 
+                            <router-link class="nav-link" to="/mypage">나의감자</router-link> 
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/admin">관리자화면</router-link> 
@@ -91,7 +91,7 @@
         sans-serif;
 }
 .bg-custom{
-    background-color:#ff8c00
+    background-color:#5F4C0B
     ;
 }
 
