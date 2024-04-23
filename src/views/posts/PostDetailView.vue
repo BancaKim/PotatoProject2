@@ -48,7 +48,7 @@ const { vAlert} = useAlert();
 import {ref} from 'vue';
 
     const props = defineProps({
-        id: [String, Number],
+        id: [Number, String],
 
     })
 
@@ -69,6 +69,7 @@ import {ref} from 'vue';
         title: null,
         content: null,
         createdAt: null,
+
     });
     const error = ref(null);
     const loading = ref(false);
