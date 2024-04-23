@@ -7,7 +7,7 @@
                         <a href="/signin">회원가입</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">로그인</a>
+                    <router-link class="nav-link" to="/login">로그인</router-link> 
                     </li>
                     <li>
                         <a href="javascript:void(0)">Admin</a>

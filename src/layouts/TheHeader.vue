@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <router-link class="nav-link" to="/nested">나의감자</router-link> 
                         </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/admin">관리자화면</router-link> 
+                        </li>
                         <!--게시글-->
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

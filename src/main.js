@@ -18,3 +18,4 @@ app.use(router);
 app.use(createPinia());
 app.use(dayjs);
 app.mount('#app');
+window.Kakao.init('198fae9257e3a2b5af3086644a5de975');
