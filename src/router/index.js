@@ -13,13 +13,14 @@ import NestedOneView from '@/views/nested/NestedOneView.vue'
 import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 import NestedHomeView from  '@/views/nested/NestedHomeView.vue'
 import AdminNestedView from '@/views/admin/AdminNestedView.vue'
-import AdminOneView from '@/views/admin/AdminOneView.vue'
-import AdminTwoView from '@/views/admin/AdminTwoView.vue'
-import AdminThreeView from '@/views/admin/AdminThreeView.vue'
+import DashBoard from '@/views/admin/DashBoard.vue'
+import MemberInfo from '@/views/admin/MemberInfo.vue'
+import GridSystem from '@/views/admin/GridSystem.vue'
 import AdminHomeView from  '@/views/admin/AdminHomeView.vue'
 import login from '@/views/login/login.vue'
 import test from '@/views/login/test.vue'
 import signIn from '@/views/login/signIn.vue'
+import admin from '@/views/login/admin.vue'
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/signIn',
     name: 'signIn',
     component: signIn
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: admin
   },
   {
     path: '/about',
@@ -106,15 +112,15 @@ const routes = [
        {path: '', 
     name:'NestedHome', 
     component: AdminHomeView},
-         {path: '/nested/one', 
-    name:'NestedOne', 
-    component: AdminOneView},
-    {path: '/nested/two', 
-    name:'NestedTwo', 
-    component: AdminTwoView},
-    {path: '/nested/three', 
-    name:'NestedThree', 
-    component: AdminThreeView}
+         {path: '/nested/dashboard', 
+    name:'DashBoard', 
+    component: DashBoard},
+    {path: '/nested/memberinfo', 
+    name:'MemberInfo', 
+    component: MemberInfo},
+    {path: '/nested/gridsystem', 
+    name:'GridSystem', 
+    component: GridSystem}
     ]},
 ];
 

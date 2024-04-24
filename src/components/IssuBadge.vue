@@ -55,10 +55,10 @@ export default {
 .badges {
     position: absolute;
     top: 200px;
-    right: 12px;
-    /* display: flex; */
+    right: -5px;
+    display: flex;
     flex-direction: column;
-    display : none;
+    /* display : none; */
 }
 
 .badges .badge {

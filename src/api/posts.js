@@ -31,3 +31,7 @@ export function updatePost(id, data) {
 export function deletePost(id) {
     return axios.delete(`${API_URL}/posts/${id}`);
 }
+
+export function createId(userData){
+    return axios.post(`${API_URL}/signIn`, userData);
+}
