@@ -1,7 +1,6 @@
 <template>
-    <div class="card" style="width: 18rem;">
+    <div class="card">
         <!-- <img src="@/assets/macpro.png" class="card-img-top" alt="macpro"> -->
-        <img :src="formattedImage" class="card-img-top" alt="productimage">
         <div class="card-body">
             <!-- type : news, notice -->
             <div class="badge">
@@ -59,8 +58,6 @@ const emit =  defineEmits(['toggleLike','modal']);
 
 let likeCountson = ref(props.likeCount);
 const isLikeClass = computed(() => props.likeCount > 0 ? 'btn-danger' : 'btn-outline-danger');
-const typeName = computed(() => props.type === 'electronic' ? '전자기기' : '옷');
-const formattedImage = computed(() => props.image ? `data:image/jpeg;base64,${props.image}` : '');
 const formattedDate = computed(() => dayjs(props.createdAt).format('YYYY.MM.DD HH:mm:ss'));
 
 const toggleLike = ()=>{
