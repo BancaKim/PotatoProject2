@@ -37,30 +37,23 @@
   </v-row>
 </v-card>
 
-<v-card title="회원 Dashborad" elevation="10">
+<v-card title="회원 Dashboard" elevation="10">
   <v-row no-gutters>
       <v-col>
         <v-sheet class="pa-2 ma-2">
-          <incomeChart/>
+          <incomeuserChart/>
         </v-sheet>
       </v-col>
+
       <v-col>
         <v-sheet class="pa-2 ma-2">
-          <outcomeChart/>
-        </v-sheet>
-      </v-col>
-      <v-col>
-        <v-sheet class="pa-2 ma-2">
-          <totalcomeChart/>
-        </v-sheet>
-      </v-col>
-    </v-row>
-  <v-row no-gutters>
-    <v-col>
-        <v-sheet class="pa-2 ma-2">
-          <totalcomeLine/>
+          <incomeuserLine/>
         </v-sheet>
     </v-col>
+
+    </v-row>
+  <v-row no-gutters>
+    
     <v-col>
         <v-sheet class="pa-2 ma-2">
           <v-card title="회원 현황" subtitle="사용가능 방법" text="여기에는 월평균 유입고객 / 현재 총 회원수 등 수치" elevation="5">
@@ -80,10 +73,14 @@ import incomeChart from '@/views/admin/charts/IncomeChart'
 import outcomeChart from '@/views/admin/charts/OutcomeChart'
 import totalcomeChart from '@/views/admin/charts/TotalcomeChart'
 import totalcomeLine from '@/views/admin/charts/TotalcomeLine'
+import incomeuserChart from '@/views/admin/charts/IncomeUser'
+import incomeuserLine from '@/views/admin/charts/IncomeUserLine'
+
+
 
 export default {
   name: 'DashBoard',
-  components: { incomeChart, outcomeChart, totalcomeChart, totalcomeLine },
+  components: { incomeChart, outcomeChart, totalcomeChart, totalcomeLine, incomeuserChart,incomeuserLine },
 }
 </script>
 

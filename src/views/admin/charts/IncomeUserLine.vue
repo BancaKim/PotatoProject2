@@ -12,7 +12,7 @@
   ChartJS.register(CategoryScale, LinearScale, PointElement,LineElement,  Title, Tooltip, Legend )
   
   export default {
-    name: 'totalcomeLine',
+    name: 'incomeuserLine',
     components: {
       Line
     },
@@ -20,7 +20,7 @@
       return {
        chartData:{
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        datasets: [{label: '누적 감자페이 금액',
+        datasets: [{label: '누적 회원 수',
                     backgroundColor: '#f87979',
                     data: []} ]
                 },
@@ -33,7 +33,7 @@
 
  created() {                                                                //값을 먼저 받아오고 
     try {
-      axios.get("http://localhost:4000/gettotallineinfo")
+      axios.get("http://localhost:4000/getincomeuserinfoline")
         .then(res => {
 
 
@@ -47,7 +47,7 @@
 
           this.chartData = {
             labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        datasets: [{label: '누적 감자페이 금액',
+        datasets: [{label: '누적 회원 수',
                     backgroundColor: '#f87979',
                     data: totallineData} ]
           }
