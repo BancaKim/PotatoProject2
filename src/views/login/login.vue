@@ -1,9 +1,23 @@
 <template>
- <section class="vh-100" style="background-color: #FFFF;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+  <div class="p-5 bg-image" style="
+        background: #F5ECCE;
+        /* width: 100%; */
+        height: 450px;
+        background-repeat: repeat-x;
+        background-position: center 50%;
+        "></div>
+    <section class="vh-100" style="background-color: #FFFF;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5" >
+             <div class="card shadow-2-strong" style="border-radius: 1rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -20%);
+                background: hsla(0, 0%, 100%, 0.8);
+                backdrop-filter: blur(30px);
+                ">
           <div class="card-body p-5 text-center">
             
             <div style="display: flex; align-items: center;">
@@ -36,8 +50,9 @@
       
             <hr class="my-4">
             <!-- <a href="/kakao"></a> -->
-           <img src="@/assets/potato.jpg" style="cursor: pointer;" width="80" @click="loginStart">
-            <img :src="require('@/assets/potato.jpg')" width="80" alt="네이버 로고">
+           <img src="@/assets/카카오.jpg" style="cursor: pointer;" width="80" @click="loginStart">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img :src="require('@/assets/네이버.png')" width="80" alt="네이버 로고">
           </div>
         </div>
       </div>

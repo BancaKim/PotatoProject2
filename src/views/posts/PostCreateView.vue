@@ -57,7 +57,7 @@ const save= async ()=>{
             console.log('value 여부');
             formData.append('image', form.value.image);
         }
-        console.log('4456');
+        // console.log('4456');
         await createPost(formData);
         // router.push({name: 'PostList'})
         vSuccess('등록이 완료되었습니다.')

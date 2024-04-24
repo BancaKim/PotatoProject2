@@ -35,7 +35,7 @@
                             <!-- <a class="nav-link" href="#">Link</a> -->
                         <!-- </li>-->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/nested">나의감자</router-link> 
+                            <router-link class="nav-link" to="/mypage">나의감자</router-link> 
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/admin">관리자화면</router-link> 
@@ -58,8 +58,8 @@
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-3" type="search" placeholder="물품이나 동네를 검색해보세요"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
+                            aria-label="Search" style="color: pink; border: 2px solid #B18904;">
+                        <button class="btn btn-outline-success" type="submit" style=" border: 2px solid #FFFFFF;">
                             <span class="material-symbols-outlined"> <!--검색 돋보기-->
                                 search
                             </span>
@@ -92,7 +92,7 @@
         sans-serif;
 }
 .bg-custom{
-    background-color:#ff8c00
+    background-color:#5F4C0B
     ;
 }
 

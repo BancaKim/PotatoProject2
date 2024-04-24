@@ -1,112 +1,62 @@
 <template>
-  <h1>마켓</h1>
-  <hr class="my-4">
-  <PostFilter v-model:title="params.title_like" v-model:limit="params._limit" />
-  <div class="d-flex" role="search">
-      <button class="btn btn-outline-success" type="button" @click="goPage">글쓰기</button>
+    <hr class="my-4">
+    <div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
   </div>
-  <hr class="my-4">
-
-  <AppLoading v-if="loading" />
-  <AppError v-else-if="error" :message="'error.message'" />
-  <template v-else>
-      <AppGrid :items="posts">
-          <template v-slot="{ item }">
-              <AppCard :title="item.title" :content="item.content" :created-at="item.createdAt"
-                  @click="goPageId(item.id)" @modal="openModal(item)">
-              </AppCard>
-          </template>
-      </AppGrid>
-      <AppPagination :current-page="params._page" :pageCount="pageCount" @page="page => (params._page = page)" />
-  </template>
-
-  <Teleport to="#modal">
-      <PostModal v-model="show" :title="modalTitle" :content="modalContent" :created-at="modalCreatedAt" />
-  </Teleport>
-  <!-- summary -->
-  <template v-if="posts&&posts.length>0">
-      <hr class="my-5">
-      <AppCard2>
-          <PostDetailView :id="posts[0].id"></PostDetailView>
-      </AppCard2>
-  </template>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="@/assets/advertisement_1.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/advertisement_2.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/advertisement_3.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/advertisement_4.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/advertisement_5.png" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="@/assets/advertisement_6.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<hr class="my-4">
+<!-- <div class="container">
+  <div class="rounded-rectangle"></div>
+</div> -->
+    <h1 style="color: #5F4C0B;">공 지 사 항</h1>
+    <p style="color: #F79F81;">감자마켓의 새소식을 알립니다.</p>
+    <hr style="width: 40%; margin: 0 auto;"><br>
+    <div class="rectangle"></div>
 </template>
 
-<script setup>
-import PostDetailView from  '@/views/posts/PostDetailView.vue';
-import PostFilter from '@/components/posts/PostFilter.vue';
-import PostModal from '@/components/posts/PostModal.vue';
-import AppError from '@/components/app/AppError.vue';
-import AppLoading from '@/components/app/AppLoading.vue';
-import {getPosts} from '@/api/posts'
-import { useRouter } from 'vue-router';
-import {ref, watchEffect} from 'vue';
-import {computed} from '@vue/reactivity'
-
-const router = useRouter()
-const posts = ref([]);
-const error = ref(null);
-const loading = ref(false);
-
-//정렬
-const params = ref({
-  _sort: 'createdAt',
-  _order: 'desc',
-  _page: 1,
-  _limit: 9,
-  title_like: '',
-})
-
-//pagination
-const totalCount = ref(0);
-const pageCount = computed(()=> Math.ceil(totalCount.value/ params.value._limit))
-
-
-const fetchPosts = async() => {
-  try{
-      loading.value= true;
-      const { data,headers } = await getPosts(params.value);
-      posts.value = data;
-      totalCount.value = headers['x-total-count'];
-  }catch(err){
-      error.value = err;
-  }finally{
-      loading.value =false;
-  }
-  // getPosts()
-  // .then((response)=>{
-  //     console.log('response: ', response);
-  // }).catch(error=>{
-  //     console.log('error: ',error);
-  // });
-}
-
-
-const goPage = () => {
-  router.push('/posts/create');
-};
-watchEffect(fetchPosts);
-const goPageId = (id) => {
-  // router.push(`/posts/'${id}`);
-  router.push({
-      name:'PostDetail',
-      params: {
-          id,
-      }
-  })
-};
-const show = ref(false);
-const modalTitle = ref('');
-const modalContent = ref('');
-const modalCreatedAt = ref('');
-
-const openModal= ({title, content, createdAt})=>{
-  show.value = true;
-  modalTitle.value =title;
-  modalContent.value =content;
-  modalCreatedAt.value =createdAt;
-}
-
+<script>
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+.rectangle {
+  width: 1300px;          /* 너비 */
+  height: 250px;         /* 높이 */
+  background-color:#F6E3CE; /* 배경 색상 */
+  border: none; /* 테두리 설정 */
+  border-radius: 15px; 
+}
+</style>

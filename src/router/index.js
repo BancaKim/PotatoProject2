@@ -20,6 +20,7 @@ import AdminHomeView from  '@/views/admin/AdminHomeView.vue'
 import login from '@/views/login/login.vue'
 import test from '@/views/login/test.vue'
 import signIn from '@/views/login/signIn.vue'
+import admin from '@/views/login/admin.vue'
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/signIn',
     name: 'signIn',
     component: signIn
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: admin
   },
   {
     path: '/about',

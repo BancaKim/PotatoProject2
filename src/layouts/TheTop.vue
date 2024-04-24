@@ -10,7 +10,7 @@
                     <router-link class="nav-link" to="/login">로그인</router-link> 
                     </li>
                     <li>
-                        <a href="javascript:void(0)">Admin</a>
+                        <a href="/admin">Admin</a>
                     </li>
                 </ul>
             </div>
