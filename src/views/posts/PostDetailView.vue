@@ -2,8 +2,9 @@
     <AppLoading v-if="loading" />
     <AppError v-else-if="error" :message="error.message" />
     <div v-else>
-
+        <!-- <img :src="require(formattedImage)" width="80" aspect-ratio="5/5"> -->
         <h2>{{ post.title}}</h2>
+        <img :src="post.image" alt="productimage">
         <p>{{ post.content}}</p>
         <p class="text-muted">
             {{$dayjs(post.createdAt).format('YYYY.MM.DD HH:mm:ss')}}
@@ -43,17 +44,14 @@
 import {useRouter} from 'vue-router';
 import { getPostById, deletePost } from '@/api/posts';
 import { useAlert } from '@/composables/alert';
-
+import { ref } from 'vue';
 const { vAlert} = useAlert();
-import {ref} from 'vue';
 
-    const props = defineProps({
+const props = defineProps({
         id: [Number, String],
-
     })
-
     // const route = useRoute();
-    const router = useRouter();
+const router = useRouter();
     // const id = route.params.id;
     /*
     ref 선언 시 장점 : 한꺼번에 객체 할당이 가능
@@ -66,9 +64,21 @@ import {ref} from 'vue';
     단) 객체 할당 불가
     */
     const post = ref({
-        title: null,
-        content: null,
-        createdAt: null,
+        title: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
+            required: true,
+        },
+        createdAt: {
+            type: [String, Date, Number],
+        },
+        image: {
+            type: String
+            // default: () => ({}),
+        }
 
     });
     const error = ref(null);
@@ -81,16 +91,27 @@ import {ref} from 'vue';
             setPost(data);  //객체 할당
         } catch (err) {
             error.value = err;
-        } finally {
+            console.log(err)
+        } 
+        finally {
             loading.value = false;
         }
     }
-    const setPost = ({title,content,createdAt}) => {
-        post.value.title = title;
-        post.value.content = content;
-        post.value.createdAt = createdAt;
+    const setPost = (data) => {
+        post.value.title = data.data[0].title;
+        post.value.content = data.data[0].content;
+        post.value.createdAt = data.data[0].createdAt;
+        post.value.image = `data:image/jpeg;base64,${data.data[0].pic}`;  
     };
     fetchPost();
+
+//     const formattedImage = computed(() => {
+//         return post.value.image ? `data:image/jpeg;base64,${post.value.image}` : '';
+// });
+    // onMounted(()=>{
+    //     const { data } = getPostById(props.id);
+    //     setPost(data); 
+    // })
 
     const removeError = ref(null);
     const removeLoading = ref(false);
