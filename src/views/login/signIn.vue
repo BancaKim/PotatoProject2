@@ -21,7 +21,7 @@
 
       <div class="row d-flex justify-content-center">
         <div style="display: flex; justify-content: center; align-items: center; height: 20vh; margin-bottom: -50px;">
-    <img src="@/assets/potato.jpg" alt="Potato" style="width: 70px; height: 40px;">
+    <img :src="require('@/assets/potato.jpg')" alt="Potato" style="width: 70px; height: 40px;">
     <h2 style="margin-left: 10px; font-size: 45px;">회원가입을 해주세요.</h2> </div>
           <form @submit.prevent="doSignIn">
             <!-- 2 column grid layout with text inputs for the first and last names -->
