@@ -21,11 +21,9 @@
           <div class="card-body p-5 text-center">
             
             <div style="display: flex; align-items: center;">
-                <img src="@/assets/potato.jpg" alt="Potato" width="70px" height="40px"><br>
+                <img :src="require('@/assets/potato.jpg')" alt="Potato" width="70px" height="40px"><br>
                 <h3 style="margin-left: 10px;">로그인을 해주세요. </h3>
             </div>
-
-
             <br>
             <div data-mdb-input-init class="form-outline mb-4">
               <label class="form-label" for="typeid-2" style="text-align: left; display: block;" >아이디</label>
@@ -50,7 +48,7 @@
       
             <hr class="my-4">
             <!-- <a href="/kakao"></a> -->
-           <img src="@/assets/카카오.jpg" style="cursor: pointer;" width="80" @click="loginStart">
+           <img :src="require('@/assets/카카오.jpg')" style="cursor: pointer;" width="80" @click="loginStart">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <img :src="require('@/assets/네이버.png')" width="80" alt="네이버 로고">
           </div>

@@ -1,15 +1,27 @@
 <template>
-    <div>
+      <h1 style="margin-top: 5%">나의 감자</h1>
+      <hr>
         <br>
-        <p style="float:left">
-            <img src="@/assets/프로필.png" style="float: left; width:150px; margin-top: 100px; margin-left: 30px;">
-        </p> 
-        <div style="float: left; font-size: 25px; margin-left: 40px; margin-top: 160px;">닉네임</div>
-
-
-    </div>
-    <div style="display: flex; justify-content: center; width: 100%;">
-    <button style="width: 1200px; height: 80px; font-size: 27px; border: none;">프로필 수정</button></div>
+        <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button" style="background-color: #D2B48C; border: none; " @click="goToProfile">프로필 수정</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    <br>
+    <!-- <div style="display: flex; justify-content: center; width: 100%;">
+    <button style="width: 1300px; height: 83px; background-color: #D8D8D8; font-size: 29px; border: none; color: #848484;" @click="goToProfile">프로필 수정</button>
+    </div> -->
 
     <!-- <div style="float: left; font-size: 23px; text-decoration: underline; margin-top: 30px; text-align: left;">
     <span>매너온도</span><img src="@/assets/information.png" style="float: left; width:50px;"></div> -->
@@ -17,36 +29,42 @@
     <p style="float: left; font-size: 24px; text-decoration: underline; margin-top: 30px; margin-left: 50px; text-align: left;" >매너온도</p> &nbsp;&nbsp;
     <button aria-label="Information" style="border: 1px solid #000; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center;
       font-family: Arial, sans-serif;">i</button>
+    <div class="tooltip" @mouseover="showTooltip = true" @mouseleave="showTooltip = false">
+    <slot></slot>
+    <transition name="fade">
+      <div class="tooltiptext" v-if="showTooltip">{{ text }}</div>
+    </transition>
+  </div>
     </div>
     <div style="text-align: center; width: 100%;">
-    <img src="@/assets/Menner.png" style="width: 780px; height: 87px; margin-bottom: 50px; margin-top: -30px; margin-left: 30px;" >
-    </div >
+    <img :src="require('@/assets/Menner.png')" style="width: 780px; height: 87px; margin-bottom: 50px; margin-top: -30px; margin-left: 30px;" >
+    </div>
     <div class="potato-container">
     <div class="potato-row" v-for="(group, index) in groupedPotatoes" :key="index">
-      <img v-for="potato in group" :key="potato" src="@/assets/potato.jpg" alt="Potato" class="potato-image"/>
+      <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato" class="potato-image"/>
     </div>
     </div>
    <p>
-    <button style="width: 300px; height: 90px; font-size:30px; border: none; background-color: #D2B48C; margin-top: 30px;">포인트 결제</button> 
+    <button style="width: 300px; height: 90px; font-size:30px; color: #FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;" @click="pointpay">포인트 결제</button> 
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button style="width: 300px; height: 90px; font-size:30px; border: none; background-color: #D2B48C; margin-top: 30px;">포인트 충전</button></p>
+    <button style="width: 300px; height: 90px; font-size:30px; color:#FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;" @click="pointcharge">포인트 충전</button></p>
     
     <div class="button-container">
     <!-- 플래너 버튼 -->
-    <button class="icon-button">
-      <img src="@/assets/planner-icon.png" alt="플래너" class="icon"/>
-      <span style="font-size: 20px;">플래너 보기</span>
+    <button class="icon-button" @click="salelist">
+        <img :src="require('@/assets/planner-icon.png')" alt="판매" class="icon"/>
+      <span style="font-size: 20px;"> 판매내역</span>
     </button>
 
     <!-- 구매 버튼 -->
-    <button class="icon-button">
-      <img src="@/assets/shopping-icon.png" alt="구매" class="icon"/>
+    <button class="icon-button"  @click="buylist">
+      <img :src="require('@/assets/shopping-icon.png')" alt="구매" class="icon"/>
       <span style="font-size: 20px;">구매 보기</span>
     </button>
 
     <!-- 좋아요 버튼 -->
-    <button class="icon-button">
-      <img src="@/assets/heart-icon.png" alt="좋아요" class="icon"/>
+    <button class="icon-button"  @click="like">
+      <img :src="require('@/assets/heart-icon.png')" alt="좋아요" class="icon"/>
       <span style="font-size: 20px;">관심 목록</span>
     </button>
   </div>
@@ -59,12 +77,16 @@
 // import { reactive, toRefs } from 'vue'
 
 export default {
-    name: 'PotatoImages,IconButtons',
+    name: 'PotatoImages,IconButtons,UserProfile',
     data() {
         return {
-            potatoCnt: 16
+            potatoCnt: 16,
+            showTooltip: true
         }
     },
+    props: {
+    text: String
+     },
     computed: {
     groupedPotatoes() {
       let result = [];
@@ -80,7 +102,26 @@ export default {
 
             this.potatoCnt = 8; //DB가 저장된 갯수가 10개.
 
-        }
+        },
+        goToProfile(){
+            this.$router.push('/profile');
+        },
+        pointpay(){
+           this.$router.push('/pay');
+        },
+        pointcharge(){
+          this.$router.push('/charge');
+        },
+        salelist(){
+          this.$router.push('/sale');
+        },
+        buylist(){
+          this.$router.push('/buy');
+        },
+        like(){
+          this.$router.push('/like');
+        },
+
     }
     // setup () {
     //     const state = reactive({
@@ -150,5 +191,70 @@ export default {
 .icon-button span {
   font-size: 14px;
   color: #666;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.row {
+  display: flex; /* Flexbox를 활성화합니다. */
+  justify-content: center; /* 수평 중앙 정렬 */
+}
+body{margin-top:20px;
+background-color:#f2f6fc;
+color:#69707a;
+justify-content: center;
+}
+.img-account-profile {
+    height: 10rem;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
 </style>
