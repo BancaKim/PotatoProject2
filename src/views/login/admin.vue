@@ -21,10 +21,9 @@
             <div class="card-body p-5 text-center">
               
               <div style="display: flex; align-items: center;">
-                  <img src="@/assets/potato.jpg" alt="Potato" width="70px" height="40px"><br>
+                  <img :src="require('@/assets/potato.jpg')" alt="Potato" width="70px" height="40px"><br>
                   <h3 style="margin-left: 10px;"> 관리자 로그인 </h3>
               </div>
-  
   
               <br>
               <div data-mdb-input-init class="form-outline mb-4">
@@ -38,6 +37,9 @@
                 <input type="password" id="typePasswordX-2" class="form-control form-control-lg" style="color: gray;" />
               </div>
 
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" 
+             type="submit" style="background-color: #FFCC99; border: none; color: black;"> 로그인하러가기</button>
+             
             </div>
           </div>
         </div>

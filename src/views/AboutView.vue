@@ -28,7 +28,10 @@ mounted() {
     this.initMap();
   } else {
     const script = document.createElement('script');
+<<<<<<< HEAD
     
+=======
+>>>>>>> 09f64f1a97cb1dc1549c8e6e960a8481bdd1ef34
     script.onload = () => kakao.maps.load(this.initMap);
     script.src =
       'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=198fae9257e3a2b5af3086644a5de975';

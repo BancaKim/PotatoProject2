@@ -21,6 +21,15 @@ import login from '@/views/login/login.vue'
 import test from '@/views/login/test.vue'
 import signIn from '@/views/login/signIn.vue'
 import admin from '@/views/login/admin.vue'
+import MyProfile from '@/views/admin/PageSupporters/UserProfile.vue'
+import Pay from '@/views/admin/PageSupporters/PointPay.vue'
+import Charge from '@/views/admin/PageSupporters/PointCharge.vue'
+import Sale from '@/views/admin/PageSupporters/SaleList.vue'
+import BuyList from '@/views/admin/PageSupporters/BuyList.vue'
+import AttentionList from '@/views/admin/PageSupporters/AttentionList.vue'
+
+
+
 
 const routes = [
   {
@@ -52,6 +61,36 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: MyProfile
+  },
+  {
+    path: '/pay',
+    name: 'pay',
+    component: Pay
+  },
+  {
+    path: '/charge',
+    name: 'charge',
+    component: Charge
+  },
+  {
+    path: '/sale',
+    name: 'sale',
+    component: Sale
+  },
+  {
+    path: '/buy',
+    name: 'buy',
+    component: BuyList
+  },
+  {
+    path: '/like',
+    name: 'like',
+    component: AttentionList
   },
    {
     path: '/myarea',
