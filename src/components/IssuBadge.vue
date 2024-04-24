@@ -1,10 +1,17 @@
 <template>
     <div class="badges" ref="badges">
         <div class="badge">
+<<<<<<< HEAD
             <img :src="require('@/assets/badge1.jpg')">
         </div>
         <div class="badge">
             <img :src="require('@/assets/badge2.jpg')">
+=======
+            <img :src="require('@/assets/badge1.jpg')" alt="badge">
+        </div>
+        <div class="badge">
+            <img :src="require('@/assets/badge2.jpg')" alt="badge">
+>>>>>>> 39b7f57de5ab06366970af77843626447636bc31
         </div>
     </div>
 </template>
@@ -53,6 +60,7 @@ export default {
 
 <style scoped>
 .badges {
+    /* width: 60px; */
     position: absolute;
     top: 200px;
     right: -5px;

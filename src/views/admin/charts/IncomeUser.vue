@@ -1,5 +1,5 @@
 <template>
-  <Bar id="incomeChart" :options="chartOptions" :data="chartData" />
+  <Bar id="incomeuserChart" :options="chartOptions" :data="chartData" />
 </template>
 
 <script>
@@ -11,7 +11,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
 
-  name: 'incomeChart',
+  name: 'incomeuserChart',
   components: { Bar },
   data() {
     return {
@@ -19,9 +19,9 @@ export default {
       chartData: {
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
         datasets: [{
-          label: "충전 감자 포인트",
+          label: "월별 가입자 수",
           data: [],
-          backgroundColor: ['rgba(255, 99, 132, 0.5)']
+          backgroundColor: ['rgba(255, 165, 100, 10)']
         }]
       },
       chartOptions: {
@@ -31,12 +31,12 @@ export default {
   },
   created() {                                                                //값을 먼저 받아오고 
     try {
-      axios.get("http://localhost:4000/getincomeinfo")
+      axios.get("http://localhost:4000/getincomeuserinfo")
         .then(res => {
 
 
-          const incomeData = res.data;
-          this.chartData.datasets[0].data = incomeData;
+          const incomeuserData = res.data;
+          this.chartData.datasets[0].data = incomeuserData;
           let chartData = this.chartData.datasets[0];
           console.log(this.chartData);
           console.log(this.chartOptions)
@@ -46,9 +46,9 @@ export default {
           this.chartData = {
             labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             datasets: [{
-              label: "충전 감자페이(월단위)",
-              data: incomeData,
-              backgroundColor: ['rgba(255, 99, 132, 0.5)']
+              label: "월별 가입자 수",
+              data: incomeuserData,
+              backgroundColor: ['rgba(255, 165, 100, 10)']
             }]
           }
 
@@ -83,3 +83,36 @@ export default {
 }
 
 </script>
+
+<!-- <template>
+    <Bar
+      id="outcomeChart"
+      :options="chartOptions"
+      :data="chartData"
+    />
+  </template>
+  
+  <script>
+  import { Bar } from 'vue-chartjs'
+  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+  
+  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+  
+  export default {
+    name: 'outcomeChart',
+    components: { Bar },
+    data() {
+      return {
+        chartData: {
+          labels: [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+          datasets: [ { label : '사용 감자 포인트',
+                        data: [40, 20, 12, 52, 15,25,65,15,21,51,56,15,],
+                        backgroundColor: [ 'rgba(54, 162, 235, 0.5)' ]} ]
+        },
+        chartOptions: {
+          responsive: true
+        }
+      }
+    }
+  }
+  </script> -->
