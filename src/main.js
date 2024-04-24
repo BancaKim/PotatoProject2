@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 import globalComponents from '@/plugins/global-components.js';
 import globalDirectives from './plugins/global-directives';
 import dayjs from './plugins/dayjs';
+import vuetify from './plugins/vuetify'
 // import focus from '@/directives/focus'
 // import 'bootstrap-icons/font/bootstrap-icons.css'
 
@@ -17,5 +18,6 @@ app.use(globalComponents);
 app.use(router);
 app.use(createPinia());
 app.use(dayjs);
+app.use(vuetify);
 app.mount('#app');
 window.Kakao.init('198fae9257e3a2b5af3086644a5de975');
