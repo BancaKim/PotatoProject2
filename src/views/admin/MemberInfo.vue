@@ -132,9 +132,9 @@ export default {
             console.log(res);
             console.log(res.data);                        // 이건 Array(3) 이 옵니다
             console.log(Object.values(res.data));
-            console.log(Object.values(res.data));
-            alert(res.data.data);
+
             this.members=res.data.data;
+            console.log(this.members);
                       })
                   },
             },
