@@ -11,23 +11,22 @@
             <p class="card-text">{{ content }}</p>
 
 
-            <p class="text-muted">{{ formattedDate }}</p>
+            <p class="text-muted">{{ $dayjs(createdAt).format('YYYY.MM.DD HH:mm:ss') }}</p>
             <!-- <div class="d-flex flex-row bd-highlight"> -->
             <div class="d-flex justify-content-center bd-highlight">
-                <a href="#" class="btn mr-10" :class="isLikeClass" @click="toggleLike">좋아요 {{ likeCountson }}</a>
+                <a href="#" class="btn mr-10" :class="isLikeClass" @click="toggleLike">좋아요</a>
                 <a href="#" class="btn btn-primary" @click.stop="$emit('modal')">이동</a>
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
-    import {computed,ref} from 'vue';
-    import dayjs from 'dayjs';
-    import { postLikeCount } from '@/api/posts'
+<script>
+import { computed } from 'vue';
+import dayjs from 'dayjs';
 
-    const props = defineProps({
-        id: [Number, String],
+export default {
+    props: {
         type: {
             type: String,
             default: 'electronic',
@@ -43,33 +42,38 @@
             type: String,
             required: true,
         },
-        likeCount: {
-            type: Number,
+        isLike: {
+            type: Boolean,
+            default: false
         },
         createdAt: {
-            type: [String, Date, Number],
+            type : [String, Date, Number],
         },
         image: {
             type: String
             // default: () => ({}),
         }
-    });
-
-const emit =  defineEmits(['toggleLike','modal']);
-
-let likeCountson = ref(props.likeCount);
-const isLikeClass = computed(() => props.likeCount > 0 ? 'btn-danger' : 'btn-outline-danger');
-const typeName = computed(() => props.type === 'electronic' ? '전자기기' : '옷');
-const formattedImage = computed(() => props.image ? `data:image/jpeg;base64,${props.image}` : '');
-const formattedDate = computed(() => dayjs(props.createdAt).format('YYYY.MM.DD HH:mm:ss'));
-
-const toggleLike = ()=>{
-    event.stopPropagation();
-    likeCountson.value += 1;
-    emit('toggleLike');
-    return postLikeCount(likeCountson.value, props.id);
-}
-
+    },
+    emits: ['toggleLike','modal'],
+    setup(props, context) {
+        const isLikeClass = computed(() => props.isLike ? 'btn-danger' : 'btn-outline-danger');
+        const typeName = computed(() => props.type === 'electronic' ? '전자기기' : '옷');
+        const formattedImage = computed(()=>{
+            //base64 데이터가 제대로 렌더링 되도록 처리 
+            return props.image? `data:image/jpeg;base64,${props.image}`:'';
+        });
+        const formattedDate = computed(()=>{
+            return dayjs(props.createdAt).format('YYYY.MM.DD HH:mm:ss');
+        });
+        
+        const toggleLike = () => {
+            // props.isLike = !props.isLike;
+            context.emit('toggleLike')
+            // event.stopPropagation();
+        }
+        return { isLikeClass, typeName, formattedImage, formattedDate, toggleLike };
+    },
+};
 </script>
 
 <style scoped>
