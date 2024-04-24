@@ -41,6 +41,7 @@ const id = route.params.id;
 const form = ref({
     title: null,
     content: null,
+    id: null,
 })
 
 const error = ref(null);
@@ -59,17 +60,25 @@ const fetchPost = async () => {
         loading.value = false;
     }
 }
-const setForm = ({ title, content}) => {
-    form.value.title = title;
-    form.value.content = content;
+const setForm = (data) => {
+    form.value.title = data.data[0].title;
+    form.value.content = data.data[0].content;
+    form.value.id = id;
 };
 fetchPost();
+
 const editError = ref(null)
 const editLoading = ref(false)
+
 const edit = async ()=>{
 try{
+    const editData = {
+        id : form.value.id,
+        title : form.value.title,
+        content : form.value.content
+    }
     editLoading.value = true
-    await updatePost(id,{...form.value})
+    await updatePost(editData)
     router.push({name:'PostDetail', params: {id}})
     vSuccess('수정이 완료되었습니다.')
 }catch(err){

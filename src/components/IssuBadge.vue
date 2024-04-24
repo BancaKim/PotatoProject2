@@ -1,10 +1,10 @@
 <template>
     <div class="badges" ref="badges">
         <div class="badge">
-            <img src="@/assets/badge1.jpg" alt="badge">
+            <img :src="require('@/assets/badge1.jpg')">
         </div>
         <div class="badge">
-            <img src="@/assets/badge2.jpg" alt="badge">
+            <img :src="require('@/assets/badge2.jpg')">
         </div>
     </div>
 </template>

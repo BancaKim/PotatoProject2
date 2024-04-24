@@ -4,13 +4,17 @@
         <img :src="formattedImage" class="card-img-top" alt="productimage">
         <div class="card-body">
             <!-- type : news, notice -->
-            <span class="badge text-bg-secondary mt-2">{{ typeName }}</span>
+            <div class="badge">
+                <span class="badge text-bg-secondary text-start">{{ typeName }}</span>
+            </div>
             <h5 class="card-title">{{ title }}</h5>
             <p class="card-text">{{ content }}</p>
-            <a href="#" class="btn" :class="isLikeClass" @click="toggleLike">좋아요</a>
+
 
             <p class="text-muted">{{ $dayjs(createdAt).format('YYYY.MM.DD HH:mm:ss') }}</p>
-            <div class="d-flex flex-row-reverse bd-highlight">
+            <!-- <div class="d-flex flex-row bd-highlight"> -->
+            <div class="d-flex justify-content-center bd-highlight">
+                <a href="#" class="btn mr-10" :class="isLikeClass" @click="toggleLike">좋아요</a>
                 <a href="#" class="btn btn-primary" @click.stop="$emit('modal')">이동</a>
             </div>
         </div>
@@ -52,15 +56,10 @@ export default {
     },
     emits: ['toggleLike','modal'],
     setup(props, context) {
-        //this.$refs.formImage.src = 'data:image/jpeg;base64,dXBsb2Fkc1wxNzEzODY5MjE1OTI5LW1hY3Byby5wbmc=';
-        // console.log('props.title ', props.title);
         const isLikeClass = computed(() => props.isLike ? 'btn-danger' : 'btn-outline-danger');
         const typeName = computed(() => props.type === 'electronic' ? '전자기기' : '옷');
         const formattedImage = computed(()=>{
-            console.log(`${props.image}`);
             //base64 데이터가 제대로 렌더링 되도록 처리 
-            // return 'data:image/jpeg;base64,dXBsb2Fkc1wxNzEzODY5MjE1OTI5LW1hY3Byby5wbmc=';
-            //return props.image? `data:image/jpeg;base64,${props.image}`:'';
             return props.image? `data:image/jpeg;base64,${props.image}`:'';
         });
         const formattedDate = computed(()=>{
@@ -70,10 +69,20 @@ export default {
         const toggleLike = () => {
             // props.isLike = !props.isLike;
             context.emit('toggleLike')
+            // event.stopPropagation();
         }
         return { isLikeClass, typeName, formattedImage, formattedDate, toggleLike };
     },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card{
+    
+}
+.badge {
+/* position: relative; */
+
+/* top : 80px;     */
+}
+</style>

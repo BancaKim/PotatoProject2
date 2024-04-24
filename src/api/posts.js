@@ -9,10 +9,11 @@ export function getPosts() {
 }
 
 export function getPostById(id) {
-    return axios.get(`${API_URL}/getPosts/${id}`);
+    return axios.get(`${API_URL}/getDetail`,
+{params: {
+    boardId: id
+}});
 }
-
-
 // FormData를 사용하여 게시글 데이터를 서버에 전송
 export function createPost(formData) {
     return axios.post(`${API_URL}/posts`, 
@@ -24,12 +25,12 @@ export function createPost(formData) {
     });
 }
 
-export function updatePost(id, data) {
-    return axios.patch(`${API_URL}/posts/${id}`, data);
+export function updatePost(data) {
+    return axios.post(`${API_URL}/updatePost`, data);
 }
 
 export function deletePost(id) {
-    return axios.delete(`${API_URL}/posts/${id}`);
+    return axios.post(`${API_URL}/delPost`,{boardId:id});
 }
 
 export function createId(userData){
