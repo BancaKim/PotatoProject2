@@ -69,7 +69,7 @@
     </button>
   </div>
 
-  <input type="button" value="test" @click="test">
+  <input type="button" value="test" @click="setPotato">
 
 </template>
 
@@ -80,26 +80,32 @@ export default {
     name: 'PotatoImages,IconButtons,UserProfile',
     data() {
         return {
-            potatoCnt: 16,
+            potatoCnt: 5,
             showTooltip: true
         }
     },
-    props: {
-    text: String
-     },
     computed: {
     groupedPotatoes() {
       let result = [];
-      const potatoes = [...Array(this.potatoCnt).keys()]; // 20개의 감자 이미지를 가진 배열 생성
+      const potatoes = [...Array(this.potatoCnt).keys()]; 
       for (let i = 0; i < potatoes.length; i += 8) {
-        result.push(potatoes.slice(i, i + 8)); // 배열을 10개 단위로 쪼개어 result에 추가
+        result.push(potatoes.slice(i, i + 8)); 
       }
+
       return result;
     }
   },
     methods: {
-        test() {
+        setPotato() {
 
+          /*
+            axios.get('http://localhost:4000/myPageInfo', {
+              params: {
+                userId: 1
+              }
+            })
+
+            */
             this.potatoCnt = 8; //DB가 저장된 갯수가 10개.
 
         },
@@ -121,17 +127,7 @@ export default {
         like(){
           this.$router.push('/like');
         },
-
     }
-    // setup () {
-    //     const state = reactive({
-    //         count: 0,
-    //     })
-    
-    //     return {
-    //         ...toRefs(state),
-    //     }
-    // }
 }
 </script>
 
