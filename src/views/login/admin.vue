@@ -28,17 +28,17 @@
               <br>
               <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="typeid-2" style="text-align: left; display: block;" >아이디</label>
-                <input type="ID" id="typeid-2" class="form-control form-control-lg" style="color: gray;" />
+                <input type="ID" id="typeid-2" class="form-control form-control-lg" style="color: gray;" v-model="user_id" />
               </div>
   
   
               <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="typePasswordX-2" style="text-align: left; display: block;" >비밀번호</label>
-                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" style="color: gray;" />
+                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" style="color: gray;" v-model="user_pw"/>
               </div>
 
               <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" 
-             type="submit" style="background-color: #FFCC99; border: none; color: black;"> 로그인하러가기</button>
+             type="submit" style="background-color: #FFCC99; border: none; color: black;" @click="adminCheck()"> 로그인</button>
              
             </div>
           </div>
@@ -49,15 +49,43 @@
   </template>
   
   <script>
+  import axios from 'axios';
+
   export default {
     name: 'loginComponent',
+
+    data() {
+      return {
+        user_id:'',
+        user_pw:''
+      }
+    },
+
     methods: {
       loginStart() {
-        window.Kakao.Auth.authorize({
-          redirectUri: "http://localhost:8080/kakaoLogin",
-          // prompt: 'select_account'
-        });
+        // window.Kakao.Auth.authorize({
+        //   redirectUri: "http://localhost:8080/kakaoLogin",
+        //   // prompt: 'select_account'
+        // });
+      },
+
+      adminCheck() {
+        let obj = {};
+        obj.user_id = this.user_id  // 여기에 입력한 아이디 갖다 붙이기
+        obj.user_pw = this.user_pw  // 여기에 입력한 비밀번호 갖다 붙이기
+        axios.post("http://localhost:4000/admincheck",obj)
+         .then(res => {
+           console.log(res)
+           console.log(res.data.state)
+            if(res.data.state == 'Admin') { 
+              alert('hi admin'),
+              this.$router.push({ path: 'nested/dashboard' }) } else { alert('아이디 및 비밀번호를 다시 확인하세요')} // server2에 저장되있는 admin id가 맞으면 nested/dashboard로 이동
+           
+0         })
       }
+
+
+      
     }
   };
   </script>
