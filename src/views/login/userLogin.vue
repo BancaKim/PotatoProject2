@@ -61,71 +61,67 @@
   </section>
 </template>
 
-<script>
-// import { checkUser } from '@/api/posts'
-// import { useRouter } from 'vue-router';
+
+<script setup>
+
+import {ref} from 'vue'
 import axios from 'axios';
+import {useUserStore} from '@/store/userstore'
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
-export default {
-  name: 'loginComponent',
-  data() {
-    return {
-      userId : '',
-      userPwd : '',
-      // const router = useRouter()
+let store = useUserStore();
+let userId=ref('');
+let userPwd=ref('');
+
+const loginStart=()=>{
+    window.Kakao.Auth.authorize({
+      redirectUri: "http://localhost:8080/kakaoLogin",
+      // prompt: 'select_account'
+    })};
+
+const bt_login=()=>{
+  if (userId.value.length < 4 || userId.value.length > 12) {
+      alert("아이디를 4자리 이상, 12자리 이하로 입력하세요");
+      return;
     }
-  },
-  methods: {
-    loginStart() {
-      window.Kakao.Auth.authorize({
-        redirectUri: "http://localhost:8080/kakaoLogin",
-        // prompt: 'select_account'
-      });
-    },
-
-   bt_login(){
-      if (this.userId.length < 4 || this.userId.length > 12) {
-        alert("아이디를 4자리 이상, 12자리 이하로 입력하세요");
-        return;
-      }
-      if (this.userPwd.length < 4 || this.userPwd.length > 12) {
-        alert("비밀번호를 4자리 이상, 12자리 이하로 입력하세요");
-        return;
-      }
-     let url = "http://localhost:4000/login";
-     let obj = {};
-     obj.id = this.userId;
-     obj.pwd = this.userPwd;
-
-     axios
-       .post(url, {
-         params: obj,
-       }).then((res) => {
-         let data = res.data;
-         console.log(res);
-         console.log(data.info);
-         console.log("state: " + data.state);
-         if (res.data.state == "none") {
-           alert("아이디 또는 비밀번호 오류입니다.");
-         } else {
-           let obj1 = new Object();
-           obj1.user_id = data.info.user_id;
-           obj1.user_name = data.info.user_name;
-           obj1.user_email = data.info.user_email;
-           obj1.user_adrs = data.info.user_adrs;
-           obj1.user_pw = data.info.user_pw;
-           console.log(obj1.id);
-           console.log(obj1.pw);
-
-           this.$store.commit("addInfo", obj1);
-           this.$store.commit("onOff");
-           alert(obj1.user_name + "님 환영합니다.");
-           this.$router.push("/");
-         }
-       })
+  if (userPwd.value.length < 4 || userPwd.value.length > 12) {
+      alert("비밀번호를 4자리 이상, 12자리 이하로 입력하세요");
+      return;
     }
+    let url = "http://localhost:4000/login";
+    
+    let obj = {
+      id: userId.value,
+      pwd: userPwd.value,
+    }
+    axios
+      .post(url, {
+        params: obj,
+      }).then((res) => {
+        let data = res.data;
+        // console.log(res);
+        // console.log(data.info);
+        // console.log("state: " + data.state);
+        if (res.data.state == "none") {
+          alert("아이디 또는 비밀번호 오류입니다.");
+        } else {
+          let obj1 = new Object();
+          obj1.user_id = data.info.user_id;
+          obj1.user_name = data.info.user_name;
+          obj1.user_email = data.info.user_email;
+          obj1.user_adrs = data.info.user_adrs;
+          obj1.user_pw = data.info.user_pw;
+          // console.log(obj1.id);
+          // console.log(obj1.pw);
+
+          store.addInfo(obj1);
+          store.onOff();
+          alert(obj1.user_name + "님 환영합니다.");
+          router.push('/');
+        }
+      })
   }
-}
 </script>
 
 
