@@ -10,7 +10,8 @@
                         <router-link class="nav-link" to="/login">로그인</router-link>
                     </li>
                     <li v-else>
-                        <router-link class="nav-link" to="/login">로그아웃</router-link>
+                        <!-- <router-link class="nav-link" to="/login">로그아웃</router-link> -->
+                        <span class="logout" @click="logout">로그아웃</span>
                     </li>
                     <li>
                         <a href="/admin">Admin</a>
@@ -24,9 +25,12 @@
 <script setup>
 import {useUserStore} from '@/store/userstore'
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 // let isLogin = ref(false);
 const store = useUserStore();
+
 const ifLogin = computed(() =>{
     if (store.userInfo.length > 0){
         return false;
@@ -34,6 +38,13 @@ const ifLogin = computed(() =>{
     return true;
 })
 
+const logout = () =>{
+    localStorage.removeItem('isAuthenticated');
+    store.resetInfo();
+    store.onOff();
+    alert('로그아웃 되셨습니다!');
+    router.push('/');
+}
 </script>
 
 <style scoped>

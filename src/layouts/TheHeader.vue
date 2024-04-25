@@ -15,25 +15,14 @@
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <router-link class="nav-link active" to="/">홈</router-link>
-                            <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/posts">동네 생활</router-link>
-                            <!-- <a class="nav-link" href="#">Link</a> -->
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/about">내 근처</router-link>
-                            <!-- <a class="nav-link" href="#">Link</a> -->
                         </li>
-                        <!-- <li class="nav-item"> -->
-                            <!-- <router-link class="nav-link" to="/mypage">나의감자</router-link> -->
-                            <!-- <a class="nav-link" href="#">Link</a> -->
-                        <!-- </li> -->
-                        <!--게시글-->
-                        <!-- <li class="nav-item"> -->
-                            <!-- <router-link class="nav-link" to="/posts">게시글</router-link> -->
-                            <!-- <a class="nav-link" href="#">Link</a> -->
-                        <!-- </li>-->
+
                         <li class="nav-item">
                             <router-link class="nav-link" to="/mypage">나의 감자</router-link> 
                         </li>
