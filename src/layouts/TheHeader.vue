@@ -18,7 +18,7 @@
                             <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/posts">동네생활</router-link>
+                            <router-link class="nav-link" to="/posts">동네 생활</router-link>
                             <!-- <a class="nav-link" href="#">Link</a> -->
                         </li>
                         <li class="nav-item">
@@ -35,10 +35,10 @@
                             <!-- <a class="nav-link" href="#">Link</a> -->
                         <!-- </li>-->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/mypage">나의감자</router-link> 
+                            <router-link class="nav-link" to="/mypage">나의 감자</router-link> 
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/admin">관리자화면</router-link> 
+                            <router-link class="nav-link" to="/admin">관리자 화면</router-link> 
                         </li>
                         <!--게시글-->
                         <!-- <li class="nav-item dropdown">

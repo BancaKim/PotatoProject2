@@ -53,13 +53,14 @@ export default {
 
 <style scoped>
 .badges {
-    /* width: 60px; */
+    width: 190px;
     position: absolute;
-    top: 200px;
-    right: -5px;
-    display: flex;
+    top: 280px;
+    right: 100px;
     flex-direction: column;
-    /* display : none; */
+    height: auto; /* 높이는 자동으로 설정하여 원본 비율을 유지합니다 */
+  object-fit: contain;
+  justify-content: flex-end;
 }
 
 .badges .badge {

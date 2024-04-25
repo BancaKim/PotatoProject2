@@ -20,4 +20,4 @@ app.use(store);
 app.use(dayjs);
 app.use(vuetify);
 app.mount('#app');
-window.Kakao.init('198fae9257e3a2b5af3086644a5de975');
+window.Kakao.init('a9e57bde27a511cbdaca45366cb8927c');
