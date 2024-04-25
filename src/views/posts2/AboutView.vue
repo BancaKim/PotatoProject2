@@ -6,7 +6,7 @@
       class="my-8 border 7px border-8 solid border-zinc-200"
       id="map"
       style="
-        width: 1200px;
+        width: auto;
         height: 500px;
         background: gray;
         border-radius: 26px;
@@ -19,12 +19,16 @@
         <v-btn size="large" @click ="hideMarkers()">Marker 숨기기</v-btn>
         <v-btn size="large" @click ="showMarkers()">Marker 보기</v-btn>
   </v-col>
+  <PostListView2></PostListView2>
 </template>
 
+
+  
 <script>
+import PostListView2 from '@/views/posts2/PostListView2.vue';
 
 export default {
-
+  components: { PostListView2 },
   name: "kakaoMap",
   data() {
     return {

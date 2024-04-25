@@ -29,7 +29,7 @@
         <v-sheet class="pa-2 ma-2">
           <v-card title="감자포인트 현황" subtitle="사용가능 방법" text="여기에는 월평균 남은 감자 포인트 / 현재 총 잔여감자포인트 수치 정보 등등등" elevation="3">
             <v-card-actions>
-              <v-btn style="color:orange" @click="makeCsv()">자료 다운로드</v-btn>
+              <v-btn style="color:orange" size="large" @click="makeCsv()">자료 다운로드</v-btn>
            </v-card-actions>
           </v-card>
         </v-sheet>
