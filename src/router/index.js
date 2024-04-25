@@ -33,7 +33,7 @@ import Charge from '@/views/admin/PageSupporters/PointCharge.vue'
 import Sale from '@/views/admin/PageSupporters/SaleList.vue'
 import BuyList from '@/views/admin/PageSupporters/BuyList.vue'
 import AttentionList from '@/views/admin/PageSupporters/AttentionList.vue'
-
+import ProfileBake from '@/views/MyPageView.vue'
 
 const routes = [
   {
@@ -95,6 +95,11 @@ const routes = [
     path: '/like',
     name: 'like',
     component: AttentionList
+  },
+  {
+    path: '/profileback',
+    name: 'profileback',
+    component: ProfileBake
   },
    {
     path: '/myarea',

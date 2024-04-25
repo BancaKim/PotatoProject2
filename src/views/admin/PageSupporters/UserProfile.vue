@@ -24,6 +24,7 @@
     <label for="nickname" class="input-label" style="font-size: 24px;">주소 </label> &nbsp;&nbsp;&nbsp;
     <input type="text" id="address" class="styled-input" style="font-size: 18px; color: #B18904;" placeholder="변경할 주소를 입력해주세요." />
     </div>
+      <button style="margin-right: 30px; font-size: 20px;" @click="Back">이전</button>
       <button style="margin-right: 30px; font-size: 20px;">편집</button>
     </div>
 </div>
@@ -32,12 +33,16 @@
   
   <script>
   export default {
-    name: 'ProfilePage,StyledInput'
-    // 여기에 필요한 데이터, 메소드, 계산된 속성 등을 추가하세요.
-  };
+    name: 'ProfilePage,StyledInput',
+    methods: {
+       Back(){
+         this.$router.push('/profileback');
+        },
+    }
+  }
   </script>
   
-  <style scoped>
+<style scoped>
   .input-group {
   display: flex;
   align-items: center; /* 세로 방향 가운데 정렬 */
@@ -95,4 +100,3 @@
     cursor: pointer;
   }
   </style>
-  
