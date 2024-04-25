@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
+import AboutView from '@/views/posts2/AboutView.vue'
 import MyPageView from '@/views/MyPageView.vue'
 import MyAreaView from '@/views/MyAreaView.vue'
 import PostCreateView from '@/views/posts/PostCreateView.vue'
 import PostDetailView from '@/views/posts/PostDetailView.vue'
 import PostEditView from '@/views/posts/PostEditView.vue'
 import PostListView from '@/views/posts/PostListView.vue'
+
+import PostCreateView2 from '@/views/posts2/PostCreateView2.vue'
+import PostDetailView2 from '@/views/posts2/PostDetailView2.vue'
+// import PostListView2 from '@/views/posts2/PostListView2.vue'
+import PostEditView2 from '@/views/posts2/PostEditView2.vue'
+
 import NotFoundView from '@/views/NotFoundView.vue'
 import NestedView from '@/views/nested/NestedView.vue'
 import NestedOneView from '@/views/nested/NestedOneView.vue'
@@ -28,8 +34,6 @@ import Sale from '@/views/admin/PageSupporters/SaleList.vue'
 import BuyList from '@/views/admin/PageSupporters/BuyList.vue'
 import AttentionList from '@/views/admin/PageSupporters/AttentionList.vue'
 import ProfileBake from '@/views/MyPageView.vue'
-
-
 
 const routes = [
   {
@@ -110,10 +114,20 @@ const routes = [
     name: 'PostList',
     component: PostListView
   },
+{
+    path: '/boards',
+    name: 'BoardList',
+    component: AboutView
+  },
    {
     path: '/posts/create',
     name: 'PostCreate',
     component: PostCreateView
+  },
+  {
+    path: '/posts2/createBoard', 
+    name: 'BoardCreate',
+    component: PostCreateView2
   },
    {
     //  /posts/alice
@@ -125,10 +139,26 @@ const routes = [
     props : true
     // props: route => ({id:parseInt(route.params.id)}),
   },
+  {
+    //  /posts/alice
+    //  /posts/bruce  ->postdetailview
+    //  /user/tom
+    path: '/boards/:board_id',
+    name:"BoardDetail",
+    component: PostDetailView2,
+    props : true
+    // props: route => ({id:parseInt(route.params.id)}),
+  },
    {
     path: '/posts/:id/edit',
     name: 'PostEdit',
     component: PostEditView
+  }
+   ,
+   {
+    path: '/boards/:board_id/edit',
+    name: 'BoardEdit',
+    component: PostEditView2
   }
    ,
     {path: '/:pathMatch(.*)*', 

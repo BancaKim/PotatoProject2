@@ -1,28 +1,23 @@
 <template>
     <hr class="mt-4">
-    <h2>감자마켓 리스트</h2>
+    <h2>우리 동네 게시판</h2>
     <hr class="my-4">
-    <PostFilter v-model:title="params.title_like" v-model:limit="params._limit" />
     <div class="d-flex" role="search">
         <button class="btn btn-outline-success" type="button" @click="goPage">글쓰기</button>
     </div>
     <hr class="my-4">
 
-    <AppLoading v-if="loading" />
-    <AppError v-else-if="error" :message="'error.message'" />
-    <template v-else>
-        <AppGrid :items="posts">
-            <template v-slot="{ item }">
-                <!-- <AppCard :image="item.product_pic" :title="item.product_title" :content="item.product_content" :created-at="item.enroll_date"
+    <AppGrid :items="posts" :colClass="col-12">
+        <template v-slot="{ item }">
+            <!-- <AppCard :image="item.product_pic" :title="item.product_title" :content="item.product_content" :created-at="item.enroll_date"
                     @click="goPageId(item.product_number)" @modal="openModal(item)">
                 </AppCard> -->
-                <AppCard :id="item.id" :image="item.pic" :title="item.title" :content="item.content" :likeCount="item.likeCount" :created-at="item.createdAt"
-                    @click="goPageId(item.id)" @modal="openModal(item)">
-                </AppCard>
-            </template>
-        </AppGrid>
-        <AppPagination :current-page="params._page" :pageCount="pageCount" @page="page => (params._page = page)" />
-    </template>
+            <AppCard3 :board_id="item.board_id" :title="item.title" :content="item.content" :likeCount="item.likeCount"
+                :created-at="item.createdAt" @click="goPageId(item.board_id)" @modal="openModal(item)">
+            </AppCard3>
+        </template>
+    </AppGrid>
+    <AppPagination :current-page="params._page" :pageCount="pageCount" @page="page => (params._page = page)" />
 
     <Teleport to="#modal">
         <PostModal v-model="show" :title="modalTitle" :content="modalContent" :created-at="modalCreatedAt" />
@@ -31,18 +26,16 @@
     <template v-if="posts&&posts.length>0">
         <hr class="my-5">
         <AppCard2>
-            <PostDetailView :id="posts[0].id"></PostDetailView>
+            <PostDetailView2 :board_id="posts[0].board_id"></PostDetailView2>
         </AppCard2>
     </template>
 </template>
 
 <script setup>
-import PostDetailView from  '@/views/posts/PostDetailView.vue';
-import PostFilter from '@/components/posts/PostFilter.vue';
+import PostDetailView2 from  '@/views/posts2/PostDetailView2.vue';
 import PostModal from '@/components/posts/PostModal.vue';
-import AppError from '@/components/app/AppError.vue';
-import AppLoading from '@/components/app/AppLoading.vue';
-import {getPosts} from '@/api/posts'
+import AppCard3 from '@/views/posts2/AppCard3.vue';
+import { getBoards } from '@/api/posts'
 import { useRouter } from 'vue-router';
 import {ref, watchEffect} from 'vue';
 import {computed} from '@vue/reactivity'
@@ -72,16 +65,9 @@ const pageCount = computed(() => {
 
 const fetchPosts = async () => {
     try {
-        loading.value = true;
-        const response = await getPosts(params.value); // API 호출
-        console.log('check', response);
+        const response = await getBoards(params.value); // API 호출
         if (response.data.data) {
             posts.value = response.data.data; // 여기서 data는 배열이어야 합니다.//
-            console.log('API Response:', response.data.data);
-            // if (response.data) {
-            // posts.value = response.data; // 여기서 data는 배열이어야 합니다.//
-            // console.log('tesat', posts);
-            // console.log('API Response:', response.data);
             totalCount.value = parseInt(response.headers['x-total-count'] || 0); // 헤더에서 totalCount 추출
         } else {
             console.error('No data received', response);
@@ -95,26 +81,20 @@ const fetchPosts = async () => {
         loading.value = false;
     }
 };
-    // getPosts()
-    // .then((response)=>{
-    //     console.log('response: ', response);
-    // }).catch(error=>{
-    //     console.log('error: ',error);
-    // });
-
 
 const goPage = () => {
-    router.push('/posts/create');
+    router.push('/posts2/createBoard');
 };
 watchEffect(fetchPosts);
-const goPageId = (id) => {
-    if (!id) {
+
+const goPageId = (board_id) => {
+    if (!board_id) {
         console.error('ID is required to navigate to the detail page.');
         return;
     }
     router.push({
-        name: 'PostDetail',
-        params: { id }
+        name: 'BoardDetail',    ///수정필요
+        params: { board_id }
     });
 };
 const show = ref(false);
