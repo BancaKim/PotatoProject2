@@ -37,9 +37,9 @@
                         <li class="nav-item">
                             <router-link class="nav-link" to="/mypage">나의 감자</router-link> 
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <router-link class="nav-link" to="/admin">관리자 화면</router-link> 
-                        </li>
+                        </li> -->
                         <!--게시글-->
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

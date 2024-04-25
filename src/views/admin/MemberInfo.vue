@@ -107,8 +107,9 @@ export default {
         { key: 'user_email', title: '이메일' },
         { key: 'user_adrs', title: '주소' },
         { key: 'user_pw', title: '비밀번호' },
-        { key: 'gamja_give', title: 'gamja_(판매)' },
-        { key: 'gamja_take', title: 'gamja_(구매)' },
+        // { key: 'gamja_give', title: 'gamja_(판매)' },
+        // { key: 'gamja_take', title: 'gamja_(구매)' },
+        { key: 'is_admin', title: '관리자여부' },
       ],
       members: []
       // [

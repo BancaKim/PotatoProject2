@@ -107,7 +107,12 @@ const bt_login=()=>{
           obj1.user_adrs = data.info.user_adrs;
           obj1.user_pw = data.info.user_pw;
           obj1.is_admin = data.info.is_admin;
+<<<<<<< HEAD
           obj1.sum_potato = data.info.sum_potato;
+=======
+          // console.log(obj1.id);
+          // console.log(obj1.pw);
+>>>>>>> 858c7baccd561c81fbde170f0265a67660539e28
 
           store.addInfo(obj1);
           store.onOff();

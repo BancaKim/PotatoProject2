@@ -35,7 +35,25 @@ export default {
       map: null,
       markers: [],
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      restaurant :[
+    {
+        title: '오늘의 통닭', 
+        latlng: new kakao.maps.LatLng(127.02777281949419, 37.49462337141015)
+    },
+    {
+        title: '백소정', 
+        latlng: new kakao.maps.LatLng(127.02813455185938, 37.494280903178534)
+    },
+    {
+        title: '텃밭', 
+        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
+    },
+    {
+        title: '근린공원',
+        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
+    }
+],
     }
   },
   created() {
@@ -73,9 +91,16 @@ export default {
         level: 5,
       };
       this.map = new kakao.maps.Map(container, options);
+      
       this.displayMarker([[this.latitude, this.longitude]]);
+
+      for( var i = 0; i<this.restaurant.length; i++)
+      { this.marker = new kakao.maps.Marker({map:this.map, position:this.restaurant[i].latlng, title:this.restaurant[i].title})}
+
+
       kakao.maps.event.addListener(this.map, 'click', (mouseEvent) => {              // 클릭시 마커 생성
                 this.addMarker(mouseEvent.latLng);
+                console.log(mouseEvent.latLng);
             });
       
     },
