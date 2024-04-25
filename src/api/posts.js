@@ -78,6 +78,16 @@ export function checkUser(userId, userPwd){
         // }
     return axios.post(`${API_URL}/login`, { userId: userId,
             userPwd: userPwd});
+}
 
-    
+
+//My Page
+export function getPotato(id){
+    return axios.get(`${API_URL}/getPotato`, id);
+
+}
+export function chargePotato(data){
+    console.log('axios:'+data)
+    return axios.post(`${API_URL}/chargePotato`, data);
+
 }

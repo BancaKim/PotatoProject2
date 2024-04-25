@@ -13,9 +13,7 @@
     <template v-else>
         <AppGrid :items="posts">
             <template v-slot="{ item }">
-                <!-- <AppCard :image="item.product_pic" :title="item.product_title" :content="item.product_content" :created-at="item.enroll_date"
-                    @click="goPageId(item.product_number)" @modal="openModal(item)">
-                </AppCard> -->
+
                 <AppCard :id="item.id" :image="item.pic" :title="item.title" :content="item.content" :likeCount="item.likeCount" :created-at="item.createdAt"
                     @click="goPageId(item.id)" @modal="openModal(item)">
                 </AppCard>
@@ -47,7 +45,7 @@ import { useRouter } from 'vue-router';
 import {ref, watchEffect} from 'vue';
 import {computed} from '@vue/reactivity'
 
-const router = useRouter()
+const router = useRouter();
 const posts = ref([]);
 const error = ref(null);
 const loading = ref(false);
@@ -74,14 +72,8 @@ const fetchPosts = async () => {
     try {
         loading.value = true;
         const response = await getPosts(params.value); // API 호출
-        console.log('check', response);
         if (response.data.data) {
             posts.value = response.data.data; // 여기서 data는 배열이어야 합니다.//
-            console.log('API Response:', response.data.data);
-            // if (response.data) {
-            // posts.value = response.data; // 여기서 data는 배열이어야 합니다.//
-            // console.log('tesat', posts);
-            // console.log('API Response:', response.data);
             totalCount.value = parseInt(response.headers['x-total-count'] || 0); // 헤더에서 totalCount 추출
         } else {
             console.error('No data received', response);
@@ -95,13 +87,6 @@ const fetchPosts = async () => {
         loading.value = false;
     }
 };
-    // getPosts()
-    // .then((response)=>{
-    //     console.log('response: ', response);
-    // }).catch(error=>{
-    //     console.log('error: ',error);
-    // });
-
 
 const goPage = () => {
     router.push('/posts/create');
