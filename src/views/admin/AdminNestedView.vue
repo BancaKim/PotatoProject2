@@ -11,11 +11,11 @@
                     회원관리
                 </RouterLink>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <RouterLink class="nav-link" active-class="active" :to="{name:'GridSystem', replace: true}">
                     GridSystem
                 </RouterLink>
-            </li>
+            </li> -->
         </ul>
         <hr class="my-4">
         <RouterView></RouterView>

@@ -36,24 +36,8 @@ export default {
       markers: [],
       latitude: 0,
       longitude: 0,
-      restaurant :[
-    {
-        title: '오늘의 통닭', 
-        latlng: new kakao.maps.LatLng(127.02777281949419, 37.49462337141015)
-    },
-    {
-        title: '백소정', 
-        latlng: new kakao.maps.LatLng(127.02813455185938, 37.494280903178534)
-    },
-    {
-        title: '텃밭', 
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-    },
-    {
-        title: '근린공원',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-    }
-],
+      restaurant :[]
+    
     }
   },
   created() {
@@ -94,8 +78,22 @@ export default {
       
       this.displayMarker([[this.latitude, this.longitude]]);
 
+      this.restaurant =[
+    {
+        title: '오늘의 통닭', 
+        latlng: new kakao.maps.LatLng(127.02777281949419, 37.49462337141015)
+    },
+    {
+        title: '백소정', 
+        latlng: new kakao.maps.LatLng(127.02813455185938, 37.494280903178534)
+    }
+    ];
+
       for( var i = 0; i<this.restaurant.length; i++)
-      { this.marker = new kakao.maps.Marker({map:this.map, position:this.restaurant[i].latlng, title:this.restaurant[i].title})}
+      { const marker = new kakao.maps.Marker({map:this.map, position:this.restaurant[i].latlng});
+      console.log(marker);
+      console.log('===============');
+      this.markers.push(marker);}
 
 
       kakao.maps.event.addListener(this.map, 'click', (mouseEvent) => {              // 클릭시 마커 생성
@@ -139,11 +137,17 @@ export default {
             marker.setMap(this.map);
             this.markers.push(marker);
         },
+
         setMarkers(map) {
-            for (let i = 0; i < this.markers.length; i++) {
-                this.markers[i].setMap(map);
-            }
-        },
+    this.markers.forEach((marker) => { // 인덱스 변수 i 제거
+      marker.setMap(map);
+    });
+  },
+        // setMarkers(map) {
+        //     for (let i = 0; i < this.markers.length; i++) {
+        //         this.markers[i].setMap(map);
+        //     }
+        // },
         showMarkers() {
             this.setMarkers(this.map);
         },
