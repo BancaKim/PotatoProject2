@@ -1,7 +1,7 @@
 <template>
   <div class="long-height-div">
     <hr class="my-4">
-    <div id="carouselExampleIndicators" class="carousel slide">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -45,20 +45,22 @@
 </div> -->
     <h1 style="color: #5F4C0B;">공 지 사 항</h1>
     <p style="color: #F79F81;">감자마켓의 새소식을 알립니다.</p>
-    <hr style="width: 40%; margin: 0 auto;"><br>
+    <hr style="width: 40%; margin: 0 auto;">
     <div class="rectangle" >
-    <!-- <div id="app">
+    <div id="app">
     <transition-group name="fade" tag="div">
       <div v-for="(item, index) in currentSentence" :key="index" class="Notice">
         {{ item }}
       </div>
     </transition-group>
-  </div> -->
+  </div>
   <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Accordion Item #1
+      <span style="font-size: 30px; color: #FAAC58;">#</span>&nbsp;&nbsp;
+       <span style="font-size: 25px; color: #5F4C0B;">감</span> <span style="font-size: 18px;">동이 있는 </span> &nbsp;<span style="font-size: 25px; color: #5F4C0B;">자</span> <span style="font-size: 18px;">리 </span> &nbsp;&nbsp;
+       <span style="font-size: 25px; color: #5F4C0B;">마켓</span>
       </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -70,7 +72,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
+        <span style="font-size: 30px; color: #FAAC58;">#</span> &nbsp;<span style="font-size: 18px;"> </span>
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -82,7 +84,7 @@
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Accordion Item #3
+        <span style="font-size: 30px; color: #FAAC58;">#</span> &nbsp;<span style="font-size: 18px;"> </span>
       </button>
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -94,6 +96,8 @@
 </div>
 </div>
 </div>
+<br>
+<hr>
 </template>
 
 <script>
@@ -106,7 +110,8 @@ export default {
         "[이벤트] 5/11 아베다 라이브 구매인증시 사은품 증정",
         "[안내] 4월 하루배송 휴무 일정안내 (2024.04.27)"
       ],
-      currentSentenceIndex: 0
+      currentSentenceIndex: 0,
+      
     };
   },
   computed: {
@@ -118,8 +123,13 @@ export default {
     setInterval(() => {
       this.currentSentenceIndex = (this.currentSentenceIndex + 1) % this.sentences.length;
     }, 3000); // 3000ms 마다 문장 변경
+     
+
+  },
+
+    
   }
-};
+  
 </script>
 
 <style>
@@ -130,6 +140,7 @@ export default {
   border: none; /* 테두리 설정 */
   border-radius: 15px; 
   text-align: center;
+  margin-top: 10px;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
@@ -170,9 +181,12 @@ export default {
 .Notice{
   font-size: 25px;
   color: #DBA901;
-  text-align: center;
   height: 100px;
   margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .site-footer{
   position: fixed; /* 고정 위치 */
