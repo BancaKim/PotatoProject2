@@ -6,8 +6,11 @@
                     <li>
                         <a href="/signin">회원가입</a>
                     </li>
-                    <li>
-                    <router-link class="nav-link" to="/login">로그인</router-link> 
+                    <li v-if="ifLogin">
+                        <router-link class="nav-link" to="/login">로그인</router-link>
+                    </li>
+                    <li v-else>
+                        <router-link class="nav-link" to="/login">로그아웃</router-link>
                     </li>
                     <li>
                         <a href="/admin">Admin</a>
@@ -18,20 +21,19 @@
     </header>
 </template>
 
-<script>
-import { reactive, toRefs } from 'vue'
+<script setup>
+import {useUserStore} from '@/store/userstore'
+import { computed } from 'vue';
 
-export default {
-    setup () {
-        const state = reactive({
-            count: 0,
-        })
-    
-        return {
-            ...toRefs(state),
-        }
+// let isLogin = ref(false);
+const store = useUserStore();
+const ifLogin = computed(() =>{
+    if (store.userInfo.length > 0){
+        return false;
     }
-}
+    return true;
+})
+
 </script>
 
 <style scoped>

@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia'
 import App from './App.vue';
 import router from './router';
-import store from './store';
+// import store from './store';
 import '@/assets/myfont.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -16,7 +17,8 @@ const app = createApp(App);
 app.use(globalDirectives);
 app.use(globalComponents);
 app.use(router);
-app.use(store);
+// app.use(store);
+app.use(createPinia());
 app.use(dayjs);
 app.use(vuetify);
 app.mount('#app');
