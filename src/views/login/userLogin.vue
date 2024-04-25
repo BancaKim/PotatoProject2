@@ -112,6 +112,7 @@ const bt_login=()=>{
           obj1.user_email = data.info.user_email;
           obj1.user_adrs = data.info.user_adrs;
           obj1.user_pw = data.info.user_pw;
+          obj1.is_admin = data.info.is_admin;
           // console.log(obj1.id);
           // console.log(obj1.pw);
 
