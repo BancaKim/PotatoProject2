@@ -80,7 +80,7 @@ export default {
     name: 'PotatoImages,IconButtons,UserProfile',
     data() {
         return {
-            potatoCnt: 5,
+            potatoCnt: 0, //감자 기본값
             showTooltip: true
         }
     },
@@ -99,7 +99,7 @@ export default {
         setPotato() {
 
           /*
-            axios.get('http://localhost:4000/myPageInfo', {
+            axios.get('http://localhost:4000/myPageInfo', {   [ DB에 저장된 회원 감자 불러오기 ]
               params: {
                 userId: 1
               }

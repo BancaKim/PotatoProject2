@@ -13,32 +13,80 @@
 
 
       <div class="input-group">
-    <label for="nickname" class="input-label" style="font-size: 24px;">닉네임 </label> &nbsp;&nbsp;&nbsp;
-    <input type="text" id="nickname" class="styled-input" style="font-size: 18px; color: #B18904;" placeholder="변경할 닉네임을 입력해주세요." />
+    <label for="nickname" class="input-label" style="font-size: 24px;">아이디 </label> &nbsp;&nbsp;&nbsp;
+    <input type="text" id="user_id" class="styled-input" style="font-size: 18px; color: #B18904;" v-model="memberId" placeholder="변경할 아이디를 입력해주세요." />
     </div>
     <div class="input-group">
     <label for="nickname" class="input-label" style="font-size: 24px;">비밀번호 </label> &nbsp;&nbsp;&nbsp;
-    <input type="password" id="password" class="styled-input" style="font-size: 18px; color: #B18904;" placeholder="변경할 비밀번호를 입력해주세요." />
+    <input type="password" id="user_pw" class="styled-input" style="font-size: 18px; color: #B18904;" v-model="memberPw" placeholder="변경할 비밀번호를 입력해주세요." />
     </div>
     <div class="input-group">
     <label for="nickname" class="input-label" style="font-size: 24px;">주소 </label> &nbsp;&nbsp;&nbsp;
-    <input type="text" id="address" class="styled-input" style="font-size: 18px; color: #B18904;" placeholder="변경할 주소를 입력해주세요." />
+    <input type="text" id="user_adrs" class="styled-input" style="font-size: 18px; color: #B18904;" v-model="memberAddress" placeholder="변경할 주소를 입력해주세요." />
     </div>
       <button style="margin-right: 30px; font-size: 20px;" @click="Back">이전</button>
-      <button style="margin-right: 30px; font-size: 20px;">편집</button>
+      <button style="margin-right: 30px; font-size: 20px;" @click="updatePofile">편집</button>
     </div>
 </div>
 </div>
   </template>
   
   <script>
+  import { useUserStore } from '@/store/userstore.js';
+  import axios from 'axios';
+
+
   export default {
     name: 'ProfilePage,StyledInput',
+    data() {
+      return {
+        memberId: '', //ID 입력 창
+        memberPw: '', // PW
+        memberAddress: ''
+      }
+    },
     methods: {
        Back(){
          this.$router.push('/profileback');
         },
-    }
+
+        //사용자 프로필 정보 불러오기
+        startProfile() {
+        let store = useUserStore();
+
+        //정보가 없을 경우. alert 호출 후 return
+        if(store.getUserInfo.length == 0) {
+          alert('가입 된 정보가 없습니다.');
+          return ;
+        }
+        
+        //사용자 정보 profile 보여주기
+        let detailUser = store.getUserInfo[0];
+
+        this.memberId = detailUser.user_id;
+        this.memberPw = detailUser.user_pw;
+        this.memberAddress = detailUser.user_adrs;
+      },
+
+      //사용자 정보 수정하기
+      updatePofile() {
+
+
+        let profileObj = {};
+        profileObj.memberId = this.memberId;
+        profileObj.memberPw = this.memberPw;
+        profileObj.memberAddress = this.memberAddress;
+        axios.post('http://localhost:4000/updateUser', profileObj)
+        .then(res => {
+          console.log(res);
+          alert('성공');
+        })
+      }
+    },
+    created() {
+      this.startProfile();
+    },
+
   }
   </script>
   
