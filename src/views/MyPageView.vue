@@ -1,70 +1,84 @@
 <template>
-      <h1 style="margin-top: 5%">나의 감자</h1>
-      <hr>
-        <br>
-        <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button" style="background-color: #D2B48C; border: none; " @click="goToProfile">프로필 수정</button>
-                </div>
-            </div>
+  <h1 style="margin-top: 5%">나의 감자</h1>
+  <hr>
+  <br>
+  <div class="row">
+    <div class="col-xl-4">
+      <!-- Profile picture card-->
+      <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Profile Picture</div>
+        <div class="card-body text-center">
+          <!-- Profile picture image-->
+          <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            alt="">
+          <!-- Profile picture help block-->
+          <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+          <!-- Profile picture upload button-->
+          <button class="btn btn-primary" type="button" style="background-color: #D2B48C; border: none; "
+            @click="goToProfile">프로필 수정</button>
         </div>
       </div>
-    <br>
-    <!-- <div style="display: flex; justify-content: center; width: 100%;">
+    </div>
+  </div>
+  <br>
+  <!-- <div style="display: flex; justify-content: center; width: 100%;">
     <button style="width: 1300px; height: 83px; background-color: #D8D8D8; font-size: 29px; border: none; color: #848484;" @click="goToProfile">프로필 수정</button>
     </div> -->
 
-    <!-- <div style="float: left; font-size: 23px; text-decoration: underline; margin-top: 30px; text-align: left;">
+  <!-- <div style="float: left; font-size: 23px; text-decoration: underline; margin-top: 30px; text-align: left;">
     <span>매너온도</span><img src="@/assets/information.png" style="float: left; width:50px;"></div> -->
-    <div style="display: flex; align-items: center;" >
-    <p style="float: left; font-size: 24px; text-decoration: underline; margin-top: 30px; margin-left: 50px; text-align: left;" >매너온도</p> &nbsp;&nbsp;
+  <div style="display: flex; align-items: center;">
+    <p
+      style="float: left; font-size: 24px; text-decoration: underline; margin-top: 30px; margin-left: 50px; text-align: left;">
+      매너온도</p> &nbsp;&nbsp;
     <button aria-label="Information" style="border: 1px solid #000; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center;
       font-family: Arial, sans-serif;">i</button>
     <div class="tooltip" @mouseover="showTooltip = true" @mouseleave="showTooltip = false">
-    <slot></slot>
-    <transition name="fade">
-      <div class="tooltiptext" v-if="showTooltip">{{ text }}</div>
-    </transition>
+      <slot></slot>
+      <transition name="fade">
+        <div class="tooltiptext" v-if="showTooltip">{{ text }}</div>
+      </transition>
+    </div>
   </div>
-    </div>
-    <div style="text-align: center; width: 100%;">
-    <img :src="require('@/assets/Menner.png')" style="width: 780px; height: 87px; margin-bottom: 50px; margin-top: -30px; margin-left: 30px;" >
-    </div>
-    <div class="potato-container">
+  <div style="text-align: center; width: 100%;">
+    <img :src="require('@/assets/Menner.png')"
+      style="width: 780px; height: 87px; margin-bottom: 50px; margin-top: -30px; margin-left: 30px;">
+  </div>
+  <div class="potato-container">
     <div class="potato-row" v-for="(group, index) in groupedPotatoes" :key="index">
-      <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato" class="potato-image"/>
-    </div>
-    </div>
-   <p>
-    <button style="width: 300px; height: 90px; font-size:30px; color: #FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;" @click="pointpay">포인트 결제</button> 
+      <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato"
+        class="potato-image" />
+      <div style="font-size:40px;">
+        감자 개수: {{ potatoCnt }}
+      </div>
+    </div>``
+  </div>
+  <p>
+    <button
+      style="width: 300px; height: 90px; font-size:30px; color: #FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;"
+      @click="pointpay">포인트 결제</button>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button style="width: 300px; height: 90px; font-size:30px; color:#FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;" @click="pointcharge">포인트 충전</button></p>
-    
-    <div class="button-container">
+    <button
+      style="width: 300px; height: 90px; font-size:30px; color:#FFFFFF; border: none; background-color: #D2B48C; margin-top: 30px;"
+      @click="pointcharge">포인트 충전</button>
+  </p>
+
+  <div class="button-container">
     <!-- 플래너 버튼 -->
     <button class="icon-button" @click="salelist">
-        <img :src="require('@/assets/planner-icon.png')" alt="판매" class="icon"/>
+      <img :src="require('@/assets/planner-icon.png')" alt="판매" class="icon" />
       <span style="font-size: 20px;"> 판매내역</span>
     </button>
 
     <!-- 구매 버튼 -->
-    <button class="icon-button"  @click="buylist">
-      <img :src="require('@/assets/shopping-icon.png')" alt="구매" class="icon"/>
+    <button class="icon-button" @click="buylist">
+      <img :src="require('@/assets/shopping-icon.png')" alt="구매" class="icon" />
       <span style="font-size: 20px;">구매 보기</span>
     </button>
 
     <!-- 좋아요 버튼 -->
-    <button class="icon-button"  @click="like">
-      <img :src="require('@/assets/heart-icon.png')" alt="좋아요" class="icon"/>
+    <button class="icon-button" @click="like">
+      <img :src="require('@/assets/heart-icon.png')" alt="좋아요" class="icon" />
       <span style="font-size: 20px;">관심 목록</span>
     </button>
   </div>
@@ -77,12 +91,14 @@
 import { computed } from 'vue';
 import { useUserStore } from '@/store/userstore'
 import { useRouter } from 'vue-router';
-import { getPotato } from '@/api/posts'
+// import { getPotato } from '@/api/posts'
 const router = useRouter();
 const store = useUserStore();
 
 // let potatoCnt = store.userInfo[0].sumPotato;
-let potatoCnt = getPotato(store.getUserInfo[0].user_id);
+// let potatoCnt = getPotato(store.getUserInfo[0].user_id);
+let potatoCnt = store.getUserInfo[0].sum_potato;
+
 
 const groupedPotatoes=computed(()=> {
   let result = [];

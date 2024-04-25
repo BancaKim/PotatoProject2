@@ -8,8 +8,8 @@
 
         <br><br>
         <div class="rectangle-container">
-          <div>
-            {{ currentPotato }} 현재 감자
+          <div style="font-size:30px">
+            현재 감자 : {{ potatoCnt }} 개
           </div>
           <div class="row" v-for="row in 2" :key="row">
             <img v-for="n in 8" :key="`potato-${row}-${n}`" :src="require('@/assets/potato.jpg')" alt="Potato"
@@ -77,7 +77,7 @@ import { chargePotato } from '@/api/posts'
 const router = useRouter();
 const store = useUserStore();
 
-let currentPotato = store.getUserInfo[0].sumPotato;
+let potatoCnt = store.getUserInfo[0].sum_potato;
 let inputPotato= ref(0);
 let inputMoney = ref(0);
 let showAccount = ref(false);

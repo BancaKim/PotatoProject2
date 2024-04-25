@@ -107,7 +107,14 @@ const routes = [
   },
   {
     path: '/mypage',
-    component: MyPageView
+    name: 'MyPage',
+    component: MyPageView,
+    meta:{requiresAuth:true}
+    // beforeEnter: (to, from)=>{
+    //   console.log('to',to);
+    //   console.log('from',from);
+      
+    // }
   },
   {
     path: '/posts',
@@ -202,6 +209,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
+
+router.beforeEach((to,from,next)=>{
+  const isAuthenticated = localStorage.getItem('isAuthenticated'); // 로그인 상태를 확인
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isAuthenticated) {
+      alert('로그인을 먼저해주세요!')
+      next({ name: 'Home' }); // 로그인하지 않은 경우 홈으로 리다이렉트
+    } else {
+      next(); // 로그인된 경우 해당 라우트로 이동
+    }
+  } else {
+    next(); // 메타 필드가 없는 라우트는 그대로 진행
+  }
+});
 
 export default router

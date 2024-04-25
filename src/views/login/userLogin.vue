@@ -112,6 +112,7 @@ const bt_login=()=>{
           store.addInfo(obj1);
           store.onOff();
           alert(obj1.user_name + "님 환영합니다.");
+          localStorage.setItem('isAuthenticated', 'true');
           router.push('/');
         }
       })
