@@ -16,7 +16,6 @@
             <div class="text-none font-weight-regular">
               SEND MESSAGE
             </div>
-
             <v-dialog activator="parent" max-width="500">
               <template v-slot:default="{ isActive }">
                 <v-card rounded="lg">
@@ -32,17 +31,17 @@
 
                   <v-card-text>
                     <div class="text-medium-emphasis mb-4">
-                      ffffffffffffff
+                      To. Gun
                     </div>
 
-                    <div class="mb-2">Message (optional)</div>
+                    <div class="mb-2">Message</div>
 
                     <v-textarea :counter="300" class="mb-2" rows="2" variant="outlined" persistent-counter></v-textarea>
 
-                    <div class="text-overline mb-2">ffffff</div>
+                    <div class="text-overline mb-2">안내 </div>
 
                     <div class="text-medium-emphasis mb-1">
-                      fffffff
+                      감자마켓에서는 비방·비하·욕설 게시물을 제한하고 있습니다.
                     </div>
 
                     <!-- <v-btn class="text-none font-weight-bold ms-n4" color="primary" text="Retry Premium Free"
@@ -61,36 +60,11 @@
               </template>
             </v-dialog>
           </v-btn>
-
-          <!-- <v-btn size="small" icon>
-            <v-icon icon="mdi-menu-down"></v-icon>
-
-            <v-menu activator="parent" location="bottom end" transition="fade-transition">
-              <v-list density="compact" min-width="250" rounded="lg" slim>
-                <v-list-item prepend-icon="mdi-link" title="Copy link" link></v-list-item>
-
-                <v-divider class="my-2"></v-divider> -->
-
-                <!-- <v-list-item min-height="24">
-                  <template v-slot:subtitle>
-                    <div class="text-caption">
-                      Shared with John + 1 more
-                    </div>
-                  </template>
-                </v-list-item> -->
-              <!-- </v-list>
-            </v-menu>
-          </v-btn> -->
         </v-btn-group>
-      </div>                         <!-- 여기가 메시지 보내는 모달창 종료 -->
-
-
-      <v-btn @click="sendMessage" color="primary white--text">Send Message</v-btn> <!--내가 해보려던 메시지 전송버튼 부분 -->
-      <v-btn color="orange">회원정보 화면이동</v-btn>
-      <v-btn color="primary">삭제기능??</v-btn>
-      <v-btn color="orange">다른기능</v-btn>
+      </div>            
     </v-card-actions>
 
+   
   </v-container>
 </template>
 <script>
