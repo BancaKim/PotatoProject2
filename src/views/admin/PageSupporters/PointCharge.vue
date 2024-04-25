@@ -1,113 +1,126 @@
 <template>
-    <h1 style="margin-top: 5%">포인트 충전</h1>
-<hr>
-<div class="container">
+  <h1 style="margin-top: 5%">포인트 충전</h1>
+  <hr>
+  <div class="container">
     <div class="point-charging-page">
-    <div class="current-points" style=" margin-top: 60px">
-      <span style="font-size: 35px;">현재 포인트</span>
-      <br><br>
-      <div class="rectangle-container">
-    <div class="row" v-for="row in 2" :key="row">
-      <img 
-        v-for="n in 8" 
-        :key="`potato-${row}-${n}`" 
-        :src="require('@/assets/potato.jpg')" 
-        alt="Potato" 
-        class="potato-image" 
-      />
-    </div>
-  </div>
-    </div>
-    <br><br>
-    <div class="recharge">
-      <h2 style="font-size: 35px;">충전할 포인트</h2>
-      <br>
-    </div>
-    <div class="info-box" style="display: flex; align-items: center; justify-content: flex-start;">
-    <span class="points" style="font-size: 40px; flex-shrink: 0;">충전 포인트: </span>
-    <img :src="require('@/assets/potato.jpg')" alt="Cookie" class="img-cookie" style="width: 100px; height: 80px; margin-left: 10px;"/>
-    <div class="inline-container" style="display: flex; align-items: center; gap: 10px;">
-      <span style="font-size: 30px;">x</span>
-      <input type="text" v-model="inputValue" style="width: 50px; height: 50px; background-color: #E6E6E6; font-size: 30px; text-align: center; ">
-      <span style="font-size: 30px;">개</span>
-    </div>
-  </div>
-    <br><br>
-    <div class="amount">
-      <!-- <h2 style="font-size: 35px;">금액</h2> -->
-      <button @click="submitValue" class="Calculating">계산하기</button>
-      <br><br>
-      <div class="info-box" style="display: flex; align-items: center; justify-content: center;">
-        <div v-if="calculatedValue !== null" class="Result">
-        금 액: {{formattedCalculatedValue}} 원
+      <div class="current-points" style=" margin-top: 60px">
+        <span style="font-size: 35px;">현재 포인트</span>
+
+        <br><br>
+        <div class="rectangle-container">
+          <div>
+            {{ currentPotato }} 현재 감자
+          </div>
+          <div class="row" v-for="row in 2" :key="row">
+            <img v-for="n in 8" :key="`potato-${row}-${n}`" :src="require('@/assets/potato.jpg')" alt="Potato"
+              class="potato-image" />
+          </div>
         </div>
       </div>
-    </div>
-    <br>
-    <div class="payment-methods">
+      <br><br>
+      <div class="recharge">
+        <h2 style="font-size: 35px;">충전할 포인트</h2>
+        <br>
+      </div>
+      <div class="info-box" style="display: flex; align-items: center; justify-content: flex-start;">
+        <span class="points" style="font-size: 40px; flex-shrink: 0;">충전 포인트: </span>
+        <img :src="require('@/assets/potato.jpg')" alt="Cookie" class="img-cookie"
+          style="width: 100px; height: 80px; margin-left: 10px;" />
+        <div class="inline-container" style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 30px;">x</span>
+          <input type="text" v-model="inputPotato"
+            style="width: 50px; height: 50px; background-color: #E6E6E6; font-size: 30px; text-align: center; ">
+          <span style="font-size: 30px;">개</span>
+        </div>
+      </div>
+      <br><br>
+      <div class="amount">
+        <!-- <h2 style="font-size: 35px;">금액</h2> -->
+        <button @click="submitValue" class="Calculating">계산하기</button>
         <br><br>
-      <h2 style="font-size: 35px;">결제 수단 선택</h2>
+        <div class="info-box" style="display: flex; align-items: center; justify-content: center;">
+          <div v-if="inputMoney !== null" class="Result">
+            금 액: {{ calResult }} 원
+          </div>
+        </div>
+      </div>
       <br>
-      <input type="checkbox" id="payment-checkbox" v-model="showAccount">&nbsp;
-      <label for="payment-checkbox" class="payment-label">계좌 결제</label>
-      <p v-if="showAccount" style="font-size: 18px;">
-      계좌번호: (국민) 697601-01-649999 <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (신한) 110-331-722587</p>
+      <div class="payment-methods">
+        <br><br>
+        <h2 style="font-size: 35px;">결제 수단 선택</h2>
+        <br>
+        <input type="checkbox" id="payment-checkbox" v-model="showAccount">&nbsp;
+        <label for="payment-checkbox" class="payment-label">계좌 결제</label>
+        <p v-if="showAccount" style="font-size: 18px;">
+          계좌번호: (국민) 697601-01-649999 <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (신한) 110-331-722587</p>
 
-     
+
+      </div>
+    </div>
+    <br><br>
+    <div>
+      <button class="btn-edit" style="width: 300px; height: 80px; font-size: 30px" @click="profileBack">이
+        &nbsp;&nbsp;&nbsp; 전</button> &nbsp;
+      <button class="btn-edit" style="width: 300px; height: 80px; font-size: 30px" @click="addPotato">결
+        &nbsp;&nbsp;&nbsp; 제</button>
     </div>
   </div>
-  <br><br>
-  <div>
-    <button class="btn-edit" style="width: 300px; height: 80px; font-size: 30px" @click="Back">이  &nbsp;&nbsp;&nbsp; 전</button> &nbsp;
-    <button class="btn-edit" style="width: 300px; height: 80px; font-size: 30px">결  &nbsp;&nbsp;&nbsp; 제</button>
-  </div>
-</div>
 </template>
 
-<script>
-// import { method } from 'lodash';
-// import router from '@/router';
 
-export default {
-    name: 'PotatoRectangle',
-  data() {
-    return {
-      currentPoints: 10, // 이 값은 사용자의 현재 포인트에 따라 동적으로 변경되어야 합니다.
-      showTooltip: true,
-      inputValue: '', // 사용자의 입력을 숫자로 바인딩합니다.
-      calculatedValue: null, // 계산된 값을 저장할 속성입니다.
-      showAccount: false,
-    };
-  },
-  computed: {
-    groupedPotatoes() {
-      let result = [];
-      const potatoes = [...Array(this.potatoCnt).keys()]; 
-      for (let i = 0; i < potatoes.length; i += 8) {
-        result.push(potatoes.slice(i, i + 8)); 
-      }
-      return result;
-    },
-    formattedCalculatedValue() {
-      if (this.calculatedValue !== null) {
-        return new Intl.NumberFormat('ko-KR').format(this.calculatedValue);
-      }
-      return null;
-    }
-  },
-  methods: {
-        test() {
-            this.potatoCnt = 8; //DB가 저장된 갯수가 10개.
-        },
-       Back(){
-        this.$router.push('/profileback');
-       },
-       submitValue() {
-        this.calculatedValue = this.inputValue * 5000;// 이 메소드가 호출될 때 inputValue의 현재 값을 확인할 수 있습니다.
-    }
-},
+<script setup>
+import {ref, computed} from 'vue';
+import { useUserStore } from '@/store/userstore'
+import { useRouter } from 'vue-router';
+import { chargePotato } from '@/api/posts'
 
+const router = useRouter();
+const store = useUserStore();
+
+let currentPotato = store.getUserInfo[0].sumPotato;
+let inputPotato= ref(0);
+let inputMoney = ref(0);
+let showAccount = ref(false);
+
+const profileBack=()=>{
+  router.push('/profileBack')
+};
+
+const addPotato = async () =>{
+  try {
+    console.log('addpotato start');
+    let data={
+      user_id: store.getUserInfo[0].user_id, 
+      unit_potato: inputPotato.value,
+      potato_pay: inputMoney.value,
+    }
+    console.log(data);
+    await chargePotato(data);
+    console.log('vuedata:'+ data);
+  } catch(error){
+    console.error(error);
+  }
+  //
 }
+const calResult = computed(()=>{
+  if (inputMoney.value !== null) {
+    return new Intl.NumberFormat('ko-KR').format(inputMoney.value);
+  }
+  return null;
+});
+
+const submitValue = ()=> {
+  inputMoney.value = inputPotato.value * 5000;// 이 메소드가 호출될 때 inputValue의 현재 값을 확인할 수 있습니다.
+};
+
+// const groupedPotatoes=()=>{
+//   let result = [];
+//   const potatoes = [...Array(this.potatoCnt).keys()];
+//   for (let i = 0; i < potatoes.length; i += 8) {
+//     result.push(potatoes.slice(i, i + 8));
+//   }
+//   return result;
+// }
 </script>
 
 <style scoped>

@@ -29,6 +29,8 @@ import {useRouter} from 'vue-router';
 import {createPost} from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 import {useAlert} from '@/composables/alert';
+import { useUserStore } from '@/store/userstore'
+let store = useUserStore();
 
 const {vAlert, vSuccess} = useAlert();
 
@@ -49,6 +51,7 @@ const save= async ()=>{
     try{
         loading.value = true;
         let formData = new FormData();
+        formData.append('user_id', store.getUserInfo[0].user_id);
         formData.append('title',form.value.title);
         formData.append('content', form.value.content);
         console.log('123');

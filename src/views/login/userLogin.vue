@@ -95,14 +95,8 @@ const bt_login=()=>{
       id: userId.value,
       pwd: userPwd.value,
     }
-    axios
-      .post(url, {
-        params: obj,
-      }).then((res) => {
-        let data = res.data;
-        // console.log(res);
-        // console.log(data.info);
-        // console.log("state: " + data.state);
+    axios.post(url, {params: obj,})
+    .then((res) => {let data = res.data;
         if (res.data.state == "none") {
           alert("아이디 또는 비밀번호 오류입니다.");
         } else {
@@ -112,8 +106,8 @@ const bt_login=()=>{
           obj1.user_email = data.info.user_email;
           obj1.user_adrs = data.info.user_adrs;
           obj1.user_pw = data.info.user_pw;
-          // console.log(obj1.id);
-          // console.log(obj1.pw);
+          obj1.is_admin = data.info.is_admin;
+          obj1.sum_potato = data.info.sum_potato;
 
           store.addInfo(obj1);
           store.onOff();

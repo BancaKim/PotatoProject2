@@ -18,7 +18,7 @@ export const useUserStore = defineStore("userLogin", {
       this.userInfo.push(obj);
     },
     resetInfo() {
-      this.userInfo.splice(0, 1);
+      this.userInfo={};
     },
     onOff() {
       this.isLogin = !this.isLogin;

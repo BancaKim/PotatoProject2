@@ -38,7 +38,7 @@ import AppError from '@/components/app/AppError.vue';
 import AppLoading from '@/components/app/AppLoading.vue';
 import {getPosts} from '@/api/posts'
 import { useRouter } from 'vue-router';
-import {ref, watchEffect} from 'vue';
+import {ref, watchEffect, watch} from 'vue';
 import {computed} from '@vue/reactivity'
 
 const router = useRouter()
@@ -59,6 +59,10 @@ const params = ref({
 const totalCount = ref(0);
 const pageCount = computed(()=> Math.ceil(totalCount.value/ params.value._limit))
 
+watch(() => params.value.title_like, (newValue, oldValue) => {
+    alert('tt');
+    console.log(oldValue, newValue);
+})
 
 const fetchPosts = async() => {
     try{

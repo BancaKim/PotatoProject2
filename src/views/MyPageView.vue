@@ -73,62 +73,49 @@
 
 </template>
 
-<script>
-// import { reactive, toRefs } from 'vue'
+<script setup>
+import { computed } from 'vue';
+import { useUserStore } from '@/store/userstore'
+import { useRouter } from 'vue-router';
+import { getPotato } from '@/api/posts'
+const router = useRouter();
+const store = useUserStore();
 
-export default {
-    name: 'PotatoImages,IconButtons,UserProfile',
-    data() {
-        return {
-            potatoCnt: 5,
-            showTooltip: true
-        }
-    },
-    computed: {
-    groupedPotatoes() {
-      let result = [];
-      const potatoes = [...Array(this.potatoCnt).keys()]; 
-      for (let i = 0; i < potatoes.length; i += 8) {
-        result.push(potatoes.slice(i, i + 8)); 
-      }
+// let potatoCnt = store.userInfo[0].sumPotato;
+let potatoCnt = getPotato(store.getUserInfo[0].user_id);
 
-      return result;
-    }
-  },
-    methods: {
-        setPotato() {
+const groupedPotatoes=computed(()=> {
+  let result = [];
+  const potatoes = [...Array(potatoCnt).keys()];
+  for (let i = 0; i < potatoes.length; i += 8) {
+    result.push(potatoes.slice(i, i + 8));
+  }
+  return result;
+});
 
-          /*
-            axios.get('http://localhost:4000/myPageInfo', {
-              params: {
-                userId: 1
-              }
-            })
+const goToProfile=()=>{
+  router.push('/profile');
+};
 
-            */
-            this.potatoCnt = 8; //DB가 저장된 갯수가 10개.
+const pointpay=()=>{
+  router.push('/pay');
+};
 
-        },
-        goToProfile(){
-            this.$router.push('/profile');
-        },
-        pointpay(){
-           this.$router.push('/pay');
-        },
-        pointcharge(){
-          this.$router.push('/charge');
-        },
-        salelist(){
-          this.$router.push('/sale');
-        },
-        buylist(){
-          this.$router.push('/buy');
-        },
-        like(){
-          this.$router.push('/like');
-        },
-    }
-}
+const pointcharge=()=>{
+  router.push('/charge');
+};
+
+const salelist=()=>{
+  router.push('/sale');
+};
+
+const buylist=()=>{
+  router.push('/buy');
+};
+const like=()=>{
+  router.push('/like');
+};
+
 </script>
 
 <style>
