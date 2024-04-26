@@ -4,7 +4,6 @@
 
             <div class="container-fluid">
                 <img :src="require('@/assets/potato_brand.png')" width="100" aspect-ratio="5/5">
-                <!-- <img src="@/assets/potato_logo_back.png" id="potatologo" alt="STARBUCKS"> -->
                 &nbsp;&nbsp;<a class="navbar-brand" href="#" style="font-size: 40px">감자 &nbsp;마켓</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -26,24 +25,7 @@
                         <li class="nav-item">
                             <router-link class="nav-link" to="/mypage">나의 감자</router-link> 
                         </li>
-                        <!-- <li class="nav-item">
-                            <router-link class="nav-link" to="/admin">관리자 화면</router-link> 
-                        </li> -->
-                        <!--게시글-->
-                        <!-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                나의감자
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li> -->
+                    
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-3" type="search" placeholder="물품이나 동네를 검색해보세요"
