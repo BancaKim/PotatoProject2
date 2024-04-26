@@ -11,7 +11,7 @@
                     </li>
                     <li v-else>
                         <!-- <router-link class="nav-link" to="/login">로그아웃</router-link> -->
-                        <span class="logout" @click="logout">로그아웃</span>
+                        <span class="nav-link" @click="logout">로그아웃</span>
                     </li>
                     <li>
                         <a href="/admin">Admin</a>

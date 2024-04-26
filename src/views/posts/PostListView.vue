@@ -1,6 +1,6 @@
 <template>
     <hr class="mt-4">
-    <h2>감자마켓 리스트</h2>
+    <h2>지금 감자마켓에서 거래 가능한 상품은?</h2>
     <hr class="my-4">
     <PostFilter v-model:title="params.title_like" v-model:limit="params._limit" />
     <div class="d-flex" role="search">

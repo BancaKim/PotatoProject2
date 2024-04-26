@@ -1,7 +1,8 @@
 <template>
   <h1 style="margin-top: 5%">나의 감자</h1>
   <hr>
-  <br>
+  <h2>{{ userId }}님 안녕하세요!</h2>
+  <hr>
   <div class="row">
     <div class="col-xl-4">
       <!-- Profile picture card-->
@@ -49,7 +50,7 @@
       <div style="font-size:40px;">
         나의 감자 : {{ potatoCnt }}
         <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato"
-        class="potato-image" />
+          class="potato-image" />
       </div>
     </div>
   </div>
@@ -98,7 +99,7 @@ const store = useUserStore();
 // let potatoCnt = store.userInfo[0].sumPotato;
 // let potatoCnt = getPotato(store.getUserInfo[0].user_id);
 let potatoCnt = store.getUserInfo[0].sum_potato;
-
+let userId = store.getUserInfo[0].user_id;
 
 const groupedPotatoes=computed(()=> {
   let result = [];

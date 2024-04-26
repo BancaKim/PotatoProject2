@@ -87,7 +87,7 @@ const doPayment = async () =>{
   };
   await postPayment(obj);
   alert('구매가 완료되었습니다!');
-    router.push('/mypage')
+    router.push('/')
   } catch (err) {
     console.error(err)
   }

@@ -69,21 +69,7 @@
             <div class="text-center">
               
               <p>저희와 함께 해주세요 :)</p>
-              <!-- <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-              </button>
 
-              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-google"></i>
-              </button>
-
-              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-              </button>
-
-              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
-                <i class="fab fa-github"></i>
-              </button> -->
             </div>
           </form>
         </div>
@@ -97,9 +83,7 @@
 import { ref } from "vue";
 import {createId} from '@/api/posts';
 import { useRouter } from 'vue-router';
-import {useAlert} from '@/composables/alert';
 
-const {vAlert, vSuccess} = useAlert();
 let userName = ref("");
 let userId = ref("");
 let userPwd = ref("");
@@ -118,10 +102,10 @@ const doSignIn= async ()=>{
         userAddress : userAddress.value,
         };
         await createId(userData);
-        vSuccess('회원가입이 완료되었습니다!')
+        alert('회원가입이 완료되었습니다!')
         router.push('/');
     } catch (err){
-        vAlert('회원가입이 실패하였습니다.')
+        alert('회원가입이 실패하였습니다.')
         console.error(err);
     } 
 }
