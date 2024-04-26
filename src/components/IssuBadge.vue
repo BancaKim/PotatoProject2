@@ -1,10 +1,10 @@
 <template>
     <div class="badges" ref="badges">
         <div class="badge">
-            <img src="@/assets/badge1.jpg" alt="badge">
+            <img :src="require('@/assets/badge1.jpg')" alt="badge">
         </div>
         <div class="badge">
-            <img src="@/assets/badge2.jpg" alt="badge">
+            <img :src="require('@/assets/badge2.jpg')" alt="badge">
         </div>
     </div>
 </template>
@@ -53,12 +53,14 @@ export default {
 
 <style scoped>
 .badges {
+    width: 190px;
     position: absolute;
-    top: 200px;
-    right: 12px;
-    /* display: flex; */
+    top: 280px;
+    right: 100px;
     flex-direction: column;
-    display : none;
+    height: auto; /* 높이는 자동으로 설정하여 원본 비율을 유지합니다 */
+  object-fit: contain;
+  justify-content: flex-end;
 }
 
 .badges .badge {

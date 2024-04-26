@@ -6,11 +6,15 @@
                     <li>
                         <a href="/signin">회원가입</a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)">로그인</a>
+                    <li v-if="ifLogin">
+                        <router-link class="nav-link" to="/login">로그인</router-link>
+                    </li>
+                    <li v-else>
+                        <!-- <router-link class="nav-link" to="/login">로그아웃</router-link> -->
+                        <span class="nav-link" @click="logout">로그아웃</span>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">Admin</a>
+                        <a href="/admin">Admin</a>
                     </li>
                 </ul>
             </div>
@@ -18,19 +22,28 @@
     </header>
 </template>
 
-<script>
-import { reactive, toRefs } from 'vue'
+<script setup>
+import {useUserStore} from '@/store/userstore'
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-export default {
-    setup () {
-        const state = reactive({
-            count: 0,
-        })
-    
-        return {
-            ...toRefs(state),
-        }
+const router = useRouter();
+// let isLogin = ref(false);
+const store = useUserStore();
+
+const ifLogin = computed(() =>{
+    if (store.userInfo.length > 0){
+        return false;
     }
+    return true;
+})
+
+const logout = () =>{
+    localStorage.removeItem('isAuthenticated');
+    store.resetInfo();
+    store.onOff();
+    alert('로그아웃 되셨습니다!');
+    router.push('/');
 }
 </script>
 
@@ -82,7 +95,7 @@ header .sub-menu ul.menu li a {
     padding: 0px 16px;
     display: block;
     color: #656565;
-
+    text-decoration: none;
 }
 
 header .sub-menu ul.menu li a:hover {

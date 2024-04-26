@@ -1,5 +1,5 @@
 <template>
-    <nav class="mt-5" aria-label="Page navigation example">
+    <nav v-if="pageCount > 0" class="mt-5" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item" :class="isPrevPage">
                 <a class="page-link" href="#" aria-label="Previous" @click.prevent ="$emit('page',currentPage-1)">
@@ -33,6 +33,7 @@ const props = defineProps({
     }
 })
 defineEmits(['page'])
+console.log('current page:', props.currentPage, 'page count:',props.pageCount);
 const isPrevPage = computed(()=>{
     return { disabled: props.currentPage <= 1 };
 })
