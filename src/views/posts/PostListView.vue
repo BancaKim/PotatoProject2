@@ -14,7 +14,7 @@
         <AppGrid :items="posts">
             <template v-slot="{ item }">
 
-                <AppCard :id="item.id" :image="item.pic" :title="item.title" :content="item.content" :likeCount="item.likeCount" :created-at="item.createdAt"
+                <AppCard :id="item.id" :image="item.pic" :title="item.title" :price="item.price" :user_id="item.user_id" :content="item.content" :likeCount="item.likeCount" :created-at="item.createdAt"
                     @click="goPageId(item.id)" @modal="openModal(item)">
                 </AppCard>
             </template>

@@ -51,7 +51,7 @@
       <div style="font-size:40px;">
         감자 개수: {{ potatoCnt }}
       </div>
-    </div>``
+    </div>
   </div>
   <p>
     <button
@@ -114,7 +114,7 @@ const goToProfile=()=>{
 };
 
 const pointpay=()=>{
-  router.push('/pay');
+  router.push('/userPay');
 };
 
 const pointcharge=()=>{

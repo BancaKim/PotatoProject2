@@ -96,7 +96,8 @@ const addPotato = async () =>{
     }
     console.log(data);
     await chargePotato(data);
-    console.log('vuedata:'+ data);
+    alert(data.unit_potato +'개 충전이 완료되었습니다.');
+    router.push('/');
   } catch(error){
     console.error(error);
   }

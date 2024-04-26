@@ -5,7 +5,7 @@
         <h2>게시글 수정</h2>
         <hr class="my-4">
         <AppError v-if="editError" :message="editError.message" />
-        <PostForm v-model:title="form.title" v-model:content="form.content" @submit.prevent="edit">
+        <PostForm v-model:title="form.title" v-model:price="form.price" v-model:content="form.content" @submit.prevent="edit">
             <template #actions>
                 <button type="button" class="btn btn-outline-danger" @click="goDetailPage">취소</button>
 
@@ -40,6 +40,7 @@ const id = route.params.id;
 
 const form = ref({
     title: null,
+    price: 0,
     content: null,
     id: null,
 })
@@ -62,6 +63,7 @@ const fetchPost = async () => {
 }
 const setForm = (data) => {
     form.value.title = data.data[0].title;
+    form.value.price = data.data[0].price;
     form.value.content = data.data[0].content;
     form.value.id = id;
 };
@@ -75,6 +77,7 @@ try{
     const editData = {
         id : form.value.id,
         title : form.value.title,
+        price : form.value.price,
         content : form.value.content
     }
     editLoading.value = true
