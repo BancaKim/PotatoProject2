@@ -46,10 +46,10 @@
   </div>
   <div class="potato-container">
     <div class="potato-row" v-for="(group, index) in groupedPotatoes" :key="index">
-      <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato"
-        class="potato-image" />
       <div style="font-size:40px;">
-        감자 개수: {{ potatoCnt }}
+        나의 감자 : {{ potatoCnt }}
+        <img v-for="potato in group" :key="potato" :src="require('@/assets/potato.jpg')" alt="Potato"
+        class="potato-image" />
       </div>
     </div>
   </div>
