@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid align-center>
     <v-card title="Member information" flat>
       <template v-slot:text>
         <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" variant="outlined" hide-details
@@ -11,7 +11,8 @@
 
     <v-card-actions>
       <div class="pa-4 text-center"> <!-- 여기가 메시지 보내는 모달창 시작 -->
-        <v-btn-group color="#b2d7ef" density="comfortable" rounded="pill" divided>
+        <v-btn-group color="#b2d7ef" density="comfortable" rounded="pill" divided >
+
           <v-btn class="pe-2" prepend-icon="mdi-account-multiple-outline" variant="flat">
             <div class="text-none font-weight-regular">
               SEND MESSAGE
@@ -60,6 +61,20 @@
               </template>
             </v-dialog>
           </v-btn>
+
+        <v-btn class="pe-2" prepend-icon="mdi-account-multiple-outline" variant="flat" @click="makeCsv()">
+        <div class="text-none font-weight-regular">
+          Download File
+        </div>
+      </v-btn>
+
+      <v-btn class="pe-2" prepend-icon="mdi-account-multiple-outline" variant="flat">
+        <div class="text-none font-weight-regular">
+          회원삭제
+        </div>
+      </v-btn>
+
+
         </v-btn-group>
       </div>            
     </v-card-actions>
@@ -112,8 +127,51 @@ export default {
             console.log(this.members);
                       })
                   },
+
+                  makeCsv() {
+     axios.get("http://localhost:4000/getmeminfo")
+      .then(res => {
+        console.log(res);
+        console.log('================123')
+        let dataList = res.data.data;
+        // console.log(dataList);
+        //console.log(JSON.parse(res.data));
+        // console.log(Object.values(dataList));
+
+        let dataset = Object.values(dataList);
+        // console.log(dataset); // 데이터를 변수에 할당
+        // console.log('=====================');
+
+
+        const csvContent = this.convertToCSV(dataset);
+        console.log(csvContent);
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'export_data.csv');
+        link.click();
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  },
+
+  convertToCSV(data) {
+        const headers = Object.keys(data[0]);
+        const rows = data.map(obj=>headers.map(header=>obj[header]));
+        const headerRow = headers.join(',');
+        const csvRows = [headerRow, ...rows.map(row =>row.join(','))];
+        return csvRows.join('\n');
+
+      }
+
+
+
+
             },
 
+            
   mounted() {                                             //바로 띄울 수 있게 정보 입력
       this.getMemberInfo()
     },

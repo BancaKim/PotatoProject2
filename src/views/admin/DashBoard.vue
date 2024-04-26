@@ -52,7 +52,7 @@
     </v-col>
 
     </v-row>
-  <v-row no-gutters>
+  <!-- <v-row no-gutters>
     
     <v-col>
         <v-sheet class="pa-2 ma-2">
@@ -63,7 +63,7 @@
           </v-card>
         </v-sheet>
     </v-col> 
-  </v-row>
+  </v-row> -->
 </v-card>
 </template>
 
