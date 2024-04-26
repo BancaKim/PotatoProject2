@@ -3,13 +3,21 @@
     <AppError v-else-if="error" :message="error.message" />
     <div v-else>
         <!-- <img :src="require(formattedImage)" width="80" aspect-ratio="5/5"> -->
-        <h2>{{ post.title}}</h2>
+        <hr>
+        <h2>제목 : {{ post.title}}</h2>
+        <hr>
         <img :src="post.image" alt="productimage">
-        <p>{{ post.content}}</p>
+        <p>내용 : {{ post.content}}</p>
+        <hr>
+        <p>가격 : 감자 {{ post.price }} 개</p>
+        <hr>
         <p class="text-muted">
-            {{$dayjs(post.createdAt).format('YYYY.MM.DD HH:mm:ss')}}
+            작성일자 : {{$dayjs(post.createdAt).format('YYYY.MM.DD HH:mm:ss')}}
         </p>
+        <hr>
+        <p> 작성자 : {{ post.user_id }} </p>
         <hr class="my-4">
+
         <AppError v-if="removeError" :message="removeError.message" />
         <div class="row g-2">
             <div class="col-auto">
@@ -19,6 +27,9 @@
                 <button class="btn btn-outline-dark">다음글</button>
             </div>
             <div class="col-auto me-auto"></div>
+            <div class="col-auto">
+                <button class="btn btn-outline-primary" @click="goPayment">결제하러 가기</button>
+            </div>
             <div class="col-auto">
                 <button class="btn btn-outline-dark" @click="goListPage">목록</button>
             </div>
@@ -68,6 +79,10 @@ const router = useRouter();
             type: String,
             required: true,
         },
+        price: {
+            type: Number,
+            required: true,
+        },
         content: {
             type: String,
             required: true,
@@ -78,6 +93,9 @@ const router = useRouter();
         image: {
             type: String
             // default: () => ({}),
+        },
+        user_id: {
+            type: String
         }
 
     });
@@ -99,8 +117,10 @@ const router = useRouter();
     }
     const setPost = (data) => {
         post.value.title = data.data[0].title;
+        post.value.price = data.data[0].price;
         post.value.content = data.data[0].content;
         post.value.createdAt = data.data[0].createdAt;
+        post.value.user_id = data.data[0].user_id;
         post.value.image = `data:image/jpeg;base64,${data.data[0].pic}`;  
     };
     fetchPost();
@@ -133,6 +153,7 @@ const router = useRouter();
     }
     const goListPage = () => router.push({name:'PostList'});
     const goEditPage = () => router.push({ name: 'PostEdit', params:{id:props.id} });
+    const goPayment = () => router.push({ name: 'userPay'});
 </script>
 
 <style lang="scss" scoped></style>

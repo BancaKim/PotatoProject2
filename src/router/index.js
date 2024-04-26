@@ -28,7 +28,7 @@ import test from '@/views/login/test.vue'
 import signIn from '@/views/login/signIn.vue'
 import admin from '@/views/login/admin.vue'
 import MyProfile from '@/views/admin/PageSupporters/UserProfile.vue'
-import Pay from '@/views/admin/PageSupporters/PointPay.vue'
+import userPay from '@/views/admin/PageSupporters/PointPay.vue'
 import Charge from '@/views/admin/PageSupporters/PointCharge.vue'
 import Sale from '@/views/admin/PageSupporters/SaleList.vue'
 import BuyList from '@/views/admin/PageSupporters/BuyList.vue'
@@ -72,9 +72,10 @@ const routes = [
     component: MyProfile
   },
   {
-    path: '/pay',
-    name: 'pay',
-    component: Pay
+    path: '/userPay',
+    name: 'userPay',
+    component: userPay,
+    props : true
   },
   {
     path: '/charge',

@@ -91,3 +91,8 @@ export function chargePotato(data){
     return axios.post(`${API_URL}/chargePotato`, data);
 
 }
+export function postPayment(data){
+    console.log('axios:'+data)
+    return axios.post(`${API_URL}/postPayment`, data);
+
+}

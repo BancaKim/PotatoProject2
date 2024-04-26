@@ -98,4 +98,7 @@
 .form-control.me-3{
     width: 400px;
 }
+.material-symbols-outlined {
+    color:white;
+}
 </style>

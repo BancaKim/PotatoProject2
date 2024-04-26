@@ -114,7 +114,7 @@ const goToProfile=()=>{
 };
 
 const pointpay=()=>{
-  router.push('/pay');
+  router.push('/userPay');
 };
 
 const pointcharge=()=>{

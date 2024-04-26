@@ -4,7 +4,7 @@
         <h2>게시글 등록</h2>
         <hr class="my-4">
         <AppError v-if="error" :message="error.message"/>
-        <PostForm v-model:title="form.title" v-model:content="form.content" @update:file="handleFile" @submit.prevent="save">
+        <PostForm v-model:title="form.title" v-model:price="form.price" v-model:content="form.content" @update:file="handleFile" @submit.prevent="save">
             <template #actions>
                 <button type="button" class="btn btn-outline-dark" @click="goListPage">목록</button>
 
@@ -37,6 +37,7 @@ const {vAlert, vSuccess} = useAlert();
 const router = useRouter();
 const form = ref({
     title:null,
+    price:0,
     content:null,
     image: null
 })
@@ -53,17 +54,15 @@ const save= async ()=>{
         let formData = new FormData();
         formData.append('user_id', store.getUserInfo[0].user_id);
         formData.append('title',form.value.title);
+        formData.append('price', form.value.price);
         formData.append('content', form.value.content);
-        console.log('123');
-        console.log(form);
         if (form.value.image){
             console.log('value 여부');
             formData.append('image', form.value.image);
         }
-        // console.log('4456');
         await createPost(formData);
-        // router.push({name: 'PostList'})
-        vSuccess('등록이 완료되었습니다.')
+        vSuccess('등록이 완료되었습니다.');
+        router.push('/');
     } catch (err){
         vAlert(err.message);
         alert('비상!!!')

@@ -8,11 +8,9 @@
                 <span class="badge text-bg-secondary text-start">{{ typeName }}</span>
             </div>
             <h5 class="card-title">{{ title }}</h5>
+            <p class="card-text">감자: {{ price }}개</p>
             <p class="card-text">{{ content }}</p>
-
-
             <p class="text-muted">{{ formattedDate }}</p>
-            <!-- <div class="d-flex flex-row bd-highlight"> -->
             <div class="d-flex justify-content-center bd-highlight">
                 <a href="#" class="btn mr-10" :class="isLikeClass" @click="toggleLike">좋아요 {{ likeCountson }}</a>
                 <a href="#" class="btn btn-primary" @click.stop="$emit('modal')">이동</a>
@@ -37,6 +35,10 @@
         },
         title: {
             type: String,
+            required: true,
+        },
+        price: {
+            type: Number,
             required: true,
         },
         content: {

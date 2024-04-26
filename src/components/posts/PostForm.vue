@@ -6,6 +6,11 @@
                 id="title" placeholder="제목을 입력해주세요.">
         </div>
         <div class="mb-3 text-start">
+            <label for="price" class="form-label">가격</label>
+            <input :value="price" @input="$emit('update:price', $event.target.value)" type="number" class="form-control"
+                id="price" placeholder="가격을 입력해주세요.">
+        </div>
+        <div class="mb-3 text-start">
             <label for="content" class="form-label">내용</label>
             <textarea :value="content" @input="$emit('update:content', $event.target.value)" class="form-control"
                 id="content" placeholder="내용을 입력해주세요." rows="3"></textarea>
@@ -28,11 +33,12 @@
 import { ref } from 'vue';
 defineProps({
     title: String,
+    price: Number,
     content : String,
     // image : //Blob?
 });
 
-const emits = defineEmits(['update:title','update:content','update:file'])
+const emits = defineEmits(['update:title', 'update:price', 'update:content','update:file'])
 const file = ref(null);
 
 const handleFileChange = (event) => {
